@@ -1,4 +1,17 @@
-# Getting Started with Create React App
+# Residential-Solar-Calculator
+
+## How to run after cloning the repo to local device
+
+- open a terminal and navigate to the project folder "/residential-solar-calculator"
+- run command "npm install" to acquire necessary packages to run the application
+- run command "npm start" to launch the react application (it should launch in your browser on port 3000)
+
+
+
+
+
+
+## Below is the standard readme content from a default react app, leaving it here just for some basic explaination on raect
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
