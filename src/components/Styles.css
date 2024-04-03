@@ -1,5 +1,44 @@
+.home {
+    display: block;
+}
+
 .MainHeader {
     margin-top: 5vh;
     font: "calibri";
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 35vw;
+}
+.addressField {
+    border-style: none;
+    background-color: #c6c6c6;
+    position: absolute;
+    border-radius: 20px;
+    margin-left: 40vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 1vw;
+    padding-right: 8vw;
+    font: "calibri";
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: medium;
+}
+.addressField:focus {
+    outline-style: none;
+    border-width: 0;
+    border-color: #c6c6c6;
+
+}
+.submitAddress {
+    position: absolute;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 20px;
+    background-color: #e2a221;
+    border-style: none;
+    color: white;
+    font-weight: bold;
+    font-size: medium;
+    margin-left: 55vw;
 }

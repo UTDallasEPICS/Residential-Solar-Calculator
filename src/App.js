@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <nav className='nav'>
-        <Link to="/" className='nav-item'>Landing Page</Link>
+        <Link to="/" className='nav-item'>Home</Link>
         <Link to="/About" className='nav-item'>About us</Link>
       </nav>
       <Routes>
