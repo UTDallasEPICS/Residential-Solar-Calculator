@@ -6,7 +6,8 @@
 - run command "npm install" to acquire necessary packages to run the application
 - run command "npm start" to launch the react application (it should launch in your browser on port 3000)
 
-
+## Figma file link:
+- https://www.figma.com/file/mhuaRkG4vyjVTCW2TTB3Dq/Solar-Residential-Calculator-Wireframe?type=design&node-id=0%3A1&mode=design&t=98TQzRhSnh7Klh0e-1
 
 
 
