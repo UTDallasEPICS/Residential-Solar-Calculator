@@ -23,10 +23,29 @@ const SolarCalculator = () => {
     }));
   };
 
+  function calculateAvg() {
+    const usageValues = Object.values(monthlyEnergyUsage);
+    let sum = 0;
+    let count = 0;
+
+    for (let value of usageValues) {
+      if (value && !isNaN(value)) {  // Ensure the value is not empty and is a number
+        sum += parseFloat(value);    // Convert to float and sum
+        count++;
+      }
+    }
+
+    if (count === 0) return 0;  // Prevent division by zero if all are empty or invalid
+
+    return sum / count;
+  }
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     // Submit form logic goes here
-    console.log(monthlyEnergyUsage);
+    const avg = calculateAvg();
+    console.log("total average: ", avg)
+    console.log("inputted data: ", monthlyEnergyUsage);
   };
 
   const inputStyle = {
