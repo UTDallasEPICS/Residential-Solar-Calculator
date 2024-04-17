@@ -1,0 +1,2 @@
+pypvwatts,XYKoz1NiaJxYv359aCbwbtKkS7cgrwS4FOx2SrxH
+maps,hidden
