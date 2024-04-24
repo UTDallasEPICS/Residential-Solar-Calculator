@@ -6,14 +6,21 @@
     margin-top: 5vh;
     font: "calibri";
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin-left: 35vw;
+    align-self: auto;
+    text-align: center;
 }
+
+.fieldWithButton {
+    position: relative;
+    width: 30vw;
+    margin: auto;
+}
+
 .addressField {
     border-style: none;
     background-color: #c6c6c6;
     position: absolute;
     border-radius: 20px;
-    margin-left: 40vw;
     padding-top: 1vh;
     padding-bottom: 1vh;
     padding-left: 1vw;
@@ -21,6 +28,7 @@
     font: "calibri";
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: medium;
+    width: 70%;
 }
 .addressField:focus {
     outline-style: none;
@@ -28,6 +36,7 @@
     border-color: #c6c6c6;
 
 }
+
 .submitAddress {
     position: absolute;
     padding-top: 1vh;
@@ -40,5 +49,5 @@
     color: white;
     font-weight: bold;
     font-size: medium;
-    margin-left: 55vw;
+    right: 0;
 }

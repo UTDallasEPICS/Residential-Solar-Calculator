@@ -9,6 +9,10 @@ function LandingPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         alert("address entered!");
+
+
+        //https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=aIZq3vAuBiQrBN8d3hyJoh3za1m7s0aVQ12gDSzq&lat=40&lon=-105
+
     };
 
     return (
@@ -17,19 +21,22 @@ function LandingPage() {
                 Residential Solar Calculator
             </h1>
 
-            <form onSubmit={handleSubmit}>
-                
-                <input 
-                    className="addressField"
-                    type="text" 
-                    placeholder="Enter your address"
-                    value={address} 
-                    onChange={e => setAddress(e.target.value)}
-                />
-                <input className="submitAddress" type="submit" value="Submit" />
+            <div className="fieldWithButton">
+                <form onSubmit={handleSubmit}>
+                        
+                        <input 
+                            className="addressField"
+                            type="text" 
+                            placeholder="Enter your address"
+                            value={address} 
+                            onChange={e => setAddress(e.target.value)}
+                        />
+                        <input className="submitAddress" type="submit" value="Submit" />
 
-            </form>
-                <h1>{address}</h1>
+                    </form>
+            </div>
+                
+            <h1>{address}</h1>
 
         </div>
     );
