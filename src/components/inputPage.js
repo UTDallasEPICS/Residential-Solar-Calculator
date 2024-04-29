@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./inputPage.css"
 
 const SolarCalculator = () => {
   const [monthlyEnergyUsage, setMonthlyEnergyUsage] = useState({
@@ -48,41 +49,23 @@ const SolarCalculator = () => {
     console.log("inputted data: ", monthlyEnergyUsage);
   };
 
-  const inputStyle = {
-    marginBottom: '10px',
-    padding: '10px',
-    fontSize: '16px',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-  };
-
-  const submitButtonStyle = {
-    padding: '10px 15px',
-    fontSize: '16px',
-    backgroundColor: '#f0ad4e',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  };
-
   return (
-    <div className="solar-calculator" style={{ fontFamily: 'Arial, sans-serif' }}>
+    <div className="InputDiv" style={{ fontFamily: 'Arial, sans-serif' }}>
       <h1>Energy Usage</h1>
       <form onSubmit={handleSubmit}>
         {Object.keys(monthlyEnergyUsage).map((month) => (
           <label key={month} style={{ marginBottom: '20px', display: 'block' }}>
             {month}:
             <input
+              className='monthlyInputField'
               type="text"
               placeholder={`Enter energy usage for ${month} in Kilowatts`}
               value={monthlyEnergyUsage[month]}
               onChange={(e) => handleEnergyUsageChange(month, e.target.value)}
-              style={inputStyle}
             />
           </label>
         ))}
-        <button type="submit" style={submitButtonStyle}>Submit</button>
+        <button type="submit" className="monthlyInputSubmit">Submit</button>
       </form>
     </div>
   );

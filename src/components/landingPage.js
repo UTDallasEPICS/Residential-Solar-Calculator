@@ -1,6 +1,7 @@
 import React from "react";
 import "./Styles.css"
 import { useState, useEffect} from "react";
+import background from '../assets/solarPanel.jpg'
 
 function LandingPage() {
 
@@ -9,14 +10,14 @@ function LandingPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         alert("address entered!");
-
-
+        
         //https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=aIZq3vAuBiQrBN8d3hyJoh3za1m7s0aVQ12gDSzq&lat=40&lon=-105
 
     };
 
     return (
         <div className="home">
+            <img src={`${background}`} className="backgroundImage" alt="solar panel background"></img>
             <h1 className="MainHeader">
                 Residential Solar Calculator
             </h1>

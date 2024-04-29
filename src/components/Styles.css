@@ -1,9 +1,20 @@
 .home {
     display: block;
+    width: auto;
+}
+
+.backgroundImage {
+    position: absolute;
+    top: 3vh;
+    opacity: 80%;
+    z-index: -1;
+    max-width: 100%;
+    height: auto;
 }
 
 .MainHeader {
     margin-top: 5vh;
+    color: #ffffff;
     font: "calibri";
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     align-self: auto;
@@ -12,23 +23,26 @@
 
 .fieldWithButton {
     position: relative;
-    width: 30vw;
+    width: 40vw;
     margin: auto;
 }
 
 .addressField {
     border-style: none;
-    background-color: #c6c6c6;
+    background-color: #ffffff;
     position: absolute;
     border-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     padding-top: 1vh;
     padding-bottom: 1vh;
     padding-left: 1vw;
-    padding-right: 8vw;
+    padding-right: 3vw;
     font: "calibri";
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: medium;
-    width: 70%;
+    width: 80%;
+    overflow: scroll;
 }
 .addressField:focus {
     outline-style: none;
@@ -50,4 +64,9 @@
     font-weight: bold;
     font-size: medium;
     right: 0;
+    width: 20%;
+}
+
+.submitAddress:hover {
+    color: black;
 }
