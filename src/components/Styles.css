@@ -59,7 +59,8 @@
     padding-right: 1vw;
     border-radius: 20px;
     background-color: #e2a221;
-    border-style: none;
+    border-style: outselt;
+    border-color: #dd9e76;
     color: white;
     font-weight: bold;
     font-size: medium;
@@ -69,4 +70,10 @@
 
 .submitAddress:hover {
     color: black;
+}
+.map {
+    position: center;
+    margin: 0 auto;
+    padding-left: 35vw;
+    padding-top: 20vw;
 }
