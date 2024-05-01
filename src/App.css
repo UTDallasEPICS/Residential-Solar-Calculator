@@ -4,19 +4,20 @@
 
 .nav {
   background: #919191;
-  padding: 20px;
+  padding: 3vh;
   display: flex;
   height: 3vh;
 }
 .nav a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 20px;
-  margin-right: 20px;
-  text-shadow: 0 0 10px;
+  font-size: 1.5vw;
+  margin-top: auto;
+  margin-right: 2vh;
 }
 
 .nav a:hover {
   transform: scale(1.1);
   color: #ffc247;
+  text-shadow: 0 0 10px;
 }
