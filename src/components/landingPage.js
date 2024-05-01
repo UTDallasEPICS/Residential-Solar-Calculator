@@ -2,6 +2,7 @@ import React from "react";
 import "./Styles.css"
 import { useState, useEffect} from "react";
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import axios from 'axios';
 
 const AnyReactComponent = ( { text} ) => <div>{text}</div>;
 const containerStyle = {
@@ -17,7 +18,17 @@ const center = {
 function LandingPage() {
 
     const [address, setAddress] = useState("")
+    const [data, setData] = useState('');
 
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        fetch('/data').then(res => res.json()).then(data => {
+            setData(data.ac_monthly);
+          });
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         alert("address entered!");
@@ -43,6 +54,7 @@ function LandingPage() {
         <div className="home">
             <h1 className="MainHeader">
                     Residential Solar Calculator
+                    <p>Your annual AC output is {data} kWH.</p>
             </h1>
             <form onSubmit={handleSubmit}>
                 

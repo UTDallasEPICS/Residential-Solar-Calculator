@@ -1,9 +1,17 @@
-import requests
+import requests 
+import os
 from location import location
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/data', methods=['GET'])
+def get_data():
+    return jsonify({'ac_annual': 42})
 
 url = 'https://developer.nrel.gov/api/pvwatts/v8.json'
 
-api_file = open("src/solar calculator/api-keys.txt", "r")
+api_file = open("api-keys.txt", "r")
 line = api_file.readlines()[0]
 api_key = line.split(',')[1]
 
