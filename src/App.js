@@ -4,6 +4,7 @@ import {Routes, Route, Link} from "react-router-dom";
 import LandingPage from './components/landingPage';
 import About from './components/about';
 import InputPage from './components/inputPage'; // Import your InputPage component
+import background from './assets/mountainRange.jpg'
 
 function App() {
   return (

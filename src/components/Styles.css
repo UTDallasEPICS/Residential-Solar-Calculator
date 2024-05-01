@@ -1,26 +1,48 @@
 .home {
     display: block;
+    width: auto;
+}
+
+.backgroundImage {
+    position: absolute;
+    top: 3vh;
+    opacity: 80%;
+    z-index: -1;
+    max-width: 100%;
+    height: auto;
 }
 
 .MainHeader {
     margin-top: 5vh;
+    color: #ffffff;
     font: "calibri";
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin-left: 35vw;
+    align-self: auto;
+    text-align: center;
 }
+
+.fieldWithButton {
+    position: relative;
+    width: 40vw;
+    margin: auto;
+}
+
 .addressField {
     border-style: none;
-    background-color: #c6c6c6;
+    background-color: #ffffff;
     position: absolute;
     border-radius: 20px;
-    margin-left: 40vw;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     padding-top: 1vh;
     padding-bottom: 1vh;
     padding-left: 1vw;
-    padding-right: 8vw;
+    padding-right: 3vw;
     font: "calibri";
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: medium;
+    width: 80%;
+    overflow: scroll;
 }
 .addressField:focus {
     outline-style: none;
@@ -28,6 +50,7 @@
     border-color: #c6c6c6;
 
 }
+
 .submitAddress {
     position: absolute;
     padding-top: 1vh;
@@ -41,7 +64,12 @@
     color: white;
     font-weight: bold;
     font-size: medium;
-    margin-left: 55vw;
+    right: 0;
+    width: 20%;
+}
+
+.submitAddress:hover {
+    color: black;
 }
 .map {
     position: center;
