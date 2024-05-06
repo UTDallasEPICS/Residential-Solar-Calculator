@@ -1,9 +1,9 @@
 import React from "react";
 import "./Styles.css"
 import { useState, useEffect} from "react";
-<<<<<<< HEAD
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import axios from 'axios';
+import background from '../assets/solarPanel.jpg'
 
 const AnyReactComponent = ( { text} ) => <div>{text}</div>;
 const containerStyle = {
@@ -15,9 +15,6 @@ const center = {
     lat: 32.99352921142714, 
     lng: -96.7521324973148,
 };
-=======
-import background from '../assets/solarPanel.jpg'
->>>>>>> ff9d85b04bab9504a9e058b8e7d0ce7013c2b446
 
 function LandingPage() {
 
@@ -64,7 +61,6 @@ function LandingPage() {
                     Residential Solar Calculator
                     <p>Your annual AC output is {data} kWH.</p>
             </h1>
-<<<<<<< HEAD
             <form onSubmit={handleSubmit}>
                 
                 <input 
@@ -94,7 +90,6 @@ function LandingPage() {
             </GoogleMap>
             <></>
             </div>
-=======
 
             <div className="fieldWithButton">
                 <form onSubmit={handleSubmit}>
@@ -113,7 +108,6 @@ function LandingPage() {
                 
             <h1>{address}</h1>
 
->>>>>>> ff9d85b04bab9504a9e058b8e7d0ce7013c2b446
         </div>
 
 
