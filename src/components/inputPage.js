@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Container = styled.div`
   display: flex;
@@ -62,12 +63,15 @@ const Button = styled.button`
 `;
 
 const SolarCalculator = () => {
+  const navigate = useNavigate();
   const [annualEnergyUsage, setAnnualEnergyUsage] = useState('');
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Annual energy usage: ", annualEnergyUsage);
-    // Routing logic here for moving to output page
+    if (annualEnergyUsage !== '' && annualEnergyUsage > 0) {
+      event.preventDefault();
+      console.log("Annual energy usage: ", annualEnergyUsage);
+      navigate('/output-page'); // Navigate to the output page
+    }
   };
 
   return (
