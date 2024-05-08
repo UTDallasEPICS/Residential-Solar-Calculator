@@ -5,8 +5,13 @@ class location(object):
         self.address = address
         loc = Nominatim(user_agent="GetLoc")
         getLoc = loc.geocode(address)
-        self.latitude = getLoc.latitude
-        self.longitude = getLoc.longitude
+        if getLoc:
+            print(getLoc)    
+            self.latitude = getLoc.latitude
+            self.longitude = getLoc.longitude
+        else:
+            self.latitude = None
+            self.longitude = None
     def __str__(self):
         return f"{self.address}: {self.latitude}, {self.longitude}"
         

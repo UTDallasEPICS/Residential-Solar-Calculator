@@ -26,17 +26,41 @@ function LandingPage() {
     }, []);
 
     const fetchData = async () => {
-        fetch('/data').then(res => res.json()).then(data => {
-            setData(data.ac_monthly);
-          });
+        try {
+            // fetch('/getData').then(res => res.json()).then(data => {
+            //     setData(data.results.ac_annual);
+            //   });
+            const response = await fetch('getData')
+            // , {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify( { address })
+            // });
+            const jsonData = await response.json();
+            setData(jsonData.ac_annual);
+        }
+        catch (error) {
+            console.error('Error fetching data: ', error)
+        }
+
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert("address entered!");
-        
+        try {
+            const response = await axios.post('/getAddress', {address})
+        } catch (error) {
+            console.error('Error: ', error);
+        }
+        fetchData();
         //https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=aIZq3vAuBiQrBN8d3hyJoh3za1m7s0aVQ12gDSzq&lat=40&lon=-105
 
     };
+    
+    const handleChange = (e) => {
+        setAddress(e.target.value);
+    }
 
     const { isLoaded} = useJsApiLoader({
         is: 'google-map-script',
@@ -59,16 +83,18 @@ function LandingPage() {
             <img src={`${background}`} className="backgroundImage" alt="solar panel background"></img>
             <h1 className="MainHeader">
                     Residential Solar Calculator
-                    <p>Your annual AC output is {data} kWH.</p>
+                    <p>Address: {address}</p>
+                    <p>AC Annual: {data}</p>
             </h1>
             <form onSubmit={handleSubmit}>
                 
                 <input 
                     className="addressField"
+                    id = "address"
                     type="text" 
                     placeholder="Enter your address"
                     value={address} 
-                    onChange={e => setAddress(e.target.value)}
+                    onChange={handleChange}
                 />
                 <input className="submitAddress" type="submit" value="Submit" />
 
