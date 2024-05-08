@@ -3,6 +3,7 @@ import "./Styles.css"
 import { useState, useEffect} from "react";
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import axios from 'axios';
+import background from '../assets/solarPanel.jpg'
 
 const AnyReactComponent = ( { text} ) => <div>{text}</div>;
 const containerStyle = {
