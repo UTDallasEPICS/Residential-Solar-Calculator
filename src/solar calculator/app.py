@@ -1,12 +1,13 @@
 import requests 
 import os
-from location import location
+from solar_calculator.location import location
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 address = None
 results = {
-    "ac_annual": None
+    "ac_annual": None,
+    "ac_monthly": None
 }
 
 url = 'https://developer.nrel.gov/api/pvwatts/v8.json'
@@ -88,7 +89,8 @@ def display_request(address):
         capacity_factor = data['outputs']['capacity_factor']
     
         results = {
-            "ac_annual": ac_annual
+            "ac_annual": ac_annual,
+            "ac_monthly": {data['outputs']['ac_monthly']}
         }
 
         print(f"\nEstimated annual AC energy production: {ac_annual} kWh")

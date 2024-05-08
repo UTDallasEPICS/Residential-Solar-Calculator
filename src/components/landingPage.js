@@ -3,7 +3,7 @@ import "./Styles.css"
 import { useState, useEffect} from "react";
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import axios from 'axios';
-import background from '../assets/solarPanel.jpg'
+import background from '/Users/ganesh/Downloads/Residential-Solar-Calculator/src/assets/solarPanel.jpg'
 
 const AnyReactComponent = ( { text} ) => <div>{text}</div>;
 const containerStyle = {
@@ -15,12 +15,12 @@ const center = {
     lat: 32.99352921142714, 
     lng: -96.7521324973148,
 };
-import background from '../assets/solarPanel.jpg'
 
 function LandingPage() {
 
     const [address, setAddress] = useState("")
     const [data, setData] = useState('');
+    const [ACMonthly, setACMonthly] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -41,6 +41,7 @@ function LandingPage() {
             // });
             const jsonData = await response.json();
             setData(jsonData.ac_annual);
+            //setACMonthly(jsonData.ac_monthly);
         }
         catch (error) {
             console.error('Error fetching data: ', error)
@@ -86,6 +87,7 @@ function LandingPage() {
                     Residential Solar Calculator
                     <p>Address: {address}</p>
                     <p>AC Annual: {data}</p>
+                    <p>AC Monthly, January: {ACMonthly[0]}</p>
             </h1>
             <form onSubmit={handleSubmit}>
                 

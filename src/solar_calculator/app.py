@@ -1,6 +1,6 @@
 import requests 
 import os
-from location import location
+from solar_calculator.location import location
 from flask import Flask, jsonify
 
 app = Flask(__name__)
