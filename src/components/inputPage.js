@@ -5,7 +5,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding: 40px;
   font-family: 'Arial, sans-serif';
   background-color: #f4f4f9;
@@ -15,13 +14,12 @@ const Container = styled.div`
 const Title = styled.h1`
   color: #333;
   margin-bottom: 20px;
-  text-align: center;  // Ensuring the title is also centered
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center; // This will center all children horizontally
+  align-items: center; // Centers form elements horizontally
   width: 100%;
   max-width: 400px;
 `;
@@ -30,8 +28,9 @@ const Label = styled.label`
   margin-bottom: 10px;
   font-size: 16px;
   color: #666;
-  width: 100%; // Ensures the label uses the full width
-  text-align: center; // Centering the text inside the label
+  width: 100%; // Ensures the label uses the full width for proper alignment
+  display: flex;
+  justify-content: center; // Centers the text of the label
 `;
 
 const Input = styled.input`
@@ -40,8 +39,8 @@ const Input = styled.input`
   margin-bottom: 20px;
   border: 2px solid #ccc;
   border-radius: 4px;
-  display: block;  // Ensures it takes the full width of its container
-  width: 90%; // Sets the width relative to the parent, centered by padding
+  width: 100%; // Ensures the input field fills the form width
+  max-width: 360px; // Optional to limit input size
   &:focus {
     border-color: #0056b3;
     outline: none;
