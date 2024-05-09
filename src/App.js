@@ -6,6 +6,7 @@ import About from './components/about';
 import InputPage from './components/inputPage'; // Import your InputPage component
 import OutputPage from './components/outputPage';
 import background from './assets/mountainRange.jpg'
+import OutputPage from './components/outputPage';
 
 function App() {
   return (
