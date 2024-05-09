@@ -1,4 +1,19 @@
 # Residential-Solar-Calculator
+## Before running dynamic elements on the page, ensure that you have the back end component (Flask) loaded.
+
+### `flask run`
+
+## Note: 
+Navigate to the directory that "App.py" is in. 
+
+### `src/solar_calculator/app.py`
+
+Ensure that you have flask installed.
+### `pip install flask`
+
+In a separate terminal, run the front end component.
+
+### `npm start`
 
 ## How to run after cloning the repo to local device
 
