@@ -26,7 +26,11 @@
     width: 40vw;
     margin: auto;
 }
-
+.go {
+    position: relative;
+    width: 40vw;
+    margin: auto;
+}
 .addressField {
     border-style: none;
     background-color: #ffffff;
