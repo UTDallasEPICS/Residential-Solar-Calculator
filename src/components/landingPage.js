@@ -4,7 +4,7 @@ import { useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import axios from 'axios';
-import background from '/Users/ganesh/Downloads/Residential-Solar-Calculator/src/assets/solarPanel.jpg'
+import background from '../assets/solarPanel.jpg'
 import InputPage from './inputPage'
 import OutputPage from './outputPage'
 
