@@ -111,7 +111,7 @@ def process_system_info(address, annual_energy_use):
         return results
 
 def get_pv_system(annual_energy_use):
-    return (((annual_energy_use / 365) * 1.29)/ 5.06)
+    return (((annual_energy_use / 365) * 1.29)/ 5.07)
 
 def get_num_panels(pv_system):
     return round((pv_system / 0.365), 0)
