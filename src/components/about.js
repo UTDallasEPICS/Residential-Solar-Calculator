@@ -10,17 +10,17 @@ const PageContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #333;
+  color: #C95100;
   font-size: 24px;
 `;
 
 const SubTitle = styled.h2`
-  color: #555;
+  color: #e87500;
   font-size: 20px;
 `;
 
 const Text = styled.p`
-  color: #666;
+  color: #ffffff;
   font-size: 16px;
   line-height: 1.5;
   max-width: 800px;
