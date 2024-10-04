@@ -1,4 +1,4 @@
-from geopy.geocoders import Nominatim  # Import the Nominatim geocoding service from the geopy library
+from geopy.geocoders import Nominatim  # type: ignore # Import the Nominatim geocoding service from the geopy library
 
 # Define a class named 'location' to handle geocoding operations
 class location(object):

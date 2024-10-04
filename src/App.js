@@ -3,7 +3,6 @@ import './App.css'; // Your custom CSS
 import { Routes, Route, Link } from "react-router-dom";
 import LandingPage from './components/landingPage';
 import About from './components/about';
-import InputPage from './components/inputPage';
 import OutputPage from './components/outputPage';
 import logo from './assets/utdLogo.png'; // Replace with the correct path to your UTD logo
 import iconMenuOpen from './assets/icon_menu_open.png'; // Open menu icon
@@ -22,7 +21,6 @@ function App() {
       {/* Header Section */}
       <header className='header'>
         <div className="header-content">
-          {/* UTD Logo - Redirects to UTD Sustainability */}
           <a href="https://sustainability.utdallas.edu/" target="_blank" rel="noopener noreferrer">
             <img src={logo} alt="UTD Logo" className='logo-img' />
           </a>
@@ -48,8 +46,7 @@ function App() {
         <nav id="header_menu" className={menuOpen ? 'default' : 'hidden'}>
           <ul className='nav'>
             <li><Link to="/" className='nav-item'>Home</Link></li>
-            <li><Link to="/About" className='nav-item'>About us</Link></li>
-            <li><Link to="/inputPage" className='nav-item'>Input Page</Link></li>
+            <li><Link to="/About" className='nav-item'>About Us</Link></li>
             <li><Link to="/outputPage" className='nav-item'>Output Page</Link></li>
           </ul>
         </nav>
@@ -60,7 +57,6 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/About" element={<About />} />
-          <Route path="/inputPage" element={<InputPage />} />
           <Route path="/outputPage" element={<OutputPage />} />
         </Routes>
       </main>
