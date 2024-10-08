@@ -1,117 +1,132 @@
-import React from "react";
-import "./Styles.css"
-import { useState, useEffect} from "react";
-import { useNavigate } from 'react-router-dom';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import axios from 'axios';
-import background from '../assets/solarPanel.jpg'
-import InputPage from './inputPage'
-import OutputPage from './outputPage'
+import React, { useState } from "react";
+import styled from 'styled-components';
+import background from '../assets/solarPanel.jpg';
+import './Styles.css';
 
-const AnyReactComponent = ( { text} ) => <div>{text}</div>;
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-};
+// Styled components for layout and styling
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  font-family: 'Arial, sans-serif';
+  background-image: url(${background});
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+`;
 
-const center = {
-    lat: 32.99352921142714, 
-    lng: -96.7521324973148,
-};
+// Card container for white background with rounded corners and shadow
+const Card = styled.div`
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px; // Ensures the card doesn't exceed a reasonable size
+  margin: 20px auto; // Centers the card horizontally
+  text-align: center;
+  box-sizing: border-box;
+`;
 
-function LandingPage() {
-    const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState('landingPage')
-    const [address, setAddress] = useState("")
-    const [ACAnnual, setACAnnual] = useState('');
-    const [ACMonthly, setACMonthly] = useState([]);
+const Title = styled.h1`
+  color: #C95100;
+  font-size: 28px;
+  margin-bottom: 20px;
+`;
 
-    const handleNavigation = (page) => {
-        navigate(page);
-    }
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+`;
 
-    // const fetchData = async () => {
-    //     try { 
-    //         const response = await fetch('getData')
-    //         const jsonData = await response.json();
-    //         setACAnnual(jsonData.ac_annual);
-    //         setACMonthly(jsonData.ac_monthly);
-    //     }
-    //     catch (error) {
-    //         console.error('Error fetching data: ', error)
-    //     }
+const Label = styled.label`
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-    // }
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            // const response = await axios.post('/getAddress', {address})
-        } catch (error) {
-            console.error('Error: ', error);
-        }
-        //fetchData();
-        navigate('/outputPage', { state: { address } });
-        //https://developer.nrel.gov/api/solar/solar_resource/v1.json?api_key=aIZq3vAuBiQrBN8d3hyJoh3za1m7s0aVQ12gDSzq&lat=40&lon=-105
+const Input = styled.input`
+  font-size: 16px;
+  padding: 12px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 360px;
+  box-sizing: border-box;
+  &:focus {
+    border-color: #0056b3;
+    outline: none;
+  }
+`;
 
-    // };
-    
-    const handleChange = (e) => {
-        setAddress(e.target.value);
-    }
+const Button = styled.button`
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
 
-    const { isLoaded} = useJsApiLoader({
-        is: 'google-map-script',
-        googleMapsApiKey: "AIzaSyBuQesx3dhroD6_tGnOcFlbr-ACkh8axcY"
-    })
+const LandingPage = () => {
+  const [address, setAddress] = useState("");
+  const [annualEnergyUse, setAnnualEnergyUse] = useState('');
 
-    const [map, setMap] = React.useState(null)
-    const onLoad = React.useCallback(function callback(map) {
-        const bounds = new window.google.maps.LatLngBounds(center);
-        map.fitBounds(bounds);
-        setMap(map)
-    }, [])
+  // Handle form submission (currently a placeholder for functionality)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form Submitted', { address, annualEnergyUse });
+  };
 
-    const onUnmount = React.useCallback(function callback(map) {
-        setMap(null)
-    }, [])
+  return (
+    <Container>
+      <Card>
+        <Title>Residential Solar Calculator</Title>
 
-    return isLoaded ? (
-        <div className="home">
-            <img src={`${background}`} className="backgroundImage" alt="solar panel background"></img>
-            <h1 className="MainHeader">
-                    Residential Solar Calculator
-            </h1>
-            <form onSubmit={handleSubmit}>
-                
-                <input 
-                    className="addressField"
-                    id = "address"
-                    type="text" 
-                    placeholder="Enter your address"
-                    value={address} 
-                    onChange={handleChange}
-                />
-                <input className="submitAddress" type="submit" value="Submit" />
-
-            </form>
-            <div className="map">    
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={5}
-                onLoad={onLoad}
-                onUnmount={onUnmount}>
-
-            </GoogleMap>
-            
-            </div>
-        </div>
-
-
-    ): <></>
-    }
+        {/* Form Section */}
+        <Form onSubmit={handleSubmit}>
+          <Label>
+            Enter your address:
+            <Input
+              type="text"
+              placeholder="Enter your address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </Label>
+          <Label>
+            Enter your total annual energy usage in kWh:
+            <Input
+              type="number"
+              placeholder="Enter energy usage in kWh"
+              value={annualEnergyUse}
+              onChange={(e) => setAnnualEnergyUse(e.target.value)}
+            />
+          </Label>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Card>
+    </Container>
+  );
 }
+
 export default LandingPage;
