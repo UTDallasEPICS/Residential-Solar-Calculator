@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios'
+import Map from './Map';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const Container = styled.div`
   display: flex;
@@ -63,6 +65,7 @@ const Button = styled.button`
   }
 `;
 
+
 const SolarCalculator = () => {
   const navigate = useNavigate();
   const [address, setAddress] = useState("");
@@ -111,6 +114,8 @@ const SolarCalculator = () => {
         </Label>
         <Button type="submit">Submit</Button>
       </Form>
+      <Map /> 
+      
     </Container>
   );
 };

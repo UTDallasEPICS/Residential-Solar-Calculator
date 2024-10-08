@@ -63,7 +63,7 @@ function App() {
           <Route path="/inputPage" element={<InputPage />} />
           <Route path="/outputPage" element={<OutputPage />} />
         </Routes>
-      </main>
+      </main> 
     </div>
   );
 }
