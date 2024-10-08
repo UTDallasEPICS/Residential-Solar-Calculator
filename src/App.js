@@ -59,7 +59,7 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/outputPage" element={<OutputPage />} />
         </Routes>
-      </main>
+      </main> 
     </div>
   );
 }
