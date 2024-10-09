@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from "react";
 import "./Styles.css"
 import { useState, useEffect} from "react";
@@ -7,6 +8,13 @@ import axios from 'axios';
 import background from '../assets/solarPanel.jpg'
 import InputPage from './inputPage'
 import OutputPage from './outputPage'
+=======
+import React, { useState } from "react";
+import styled from 'styled-components';
+import background from '../assets/solarPanel.jpg';
+import './Styles.css';
+import Map from './Map';
+>>>>>>> Stashed changes
 
 const AnyReactComponent = ( { text} ) => <div>{text}</div>;
 const containerStyle = {
@@ -78,6 +86,7 @@ function LandingPage() {
         setMap(null)
     }, [])
 
+<<<<<<< Updated upstream
     return isLoaded ? (
         <div className="home">
             <img src={`${background}`} className="backgroundImage" alt="solar panel background"></img>
@@ -113,5 +122,33 @@ function LandingPage() {
 
     ): <></>
     }
+=======
+        {/* Form Section */}
+        <Form onSubmit={handleSubmit}>
+          <Label>
+            Enter your address:
+            <Input
+              type="text"
+              placeholder="Enter your address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </Label>
+          <Label>
+            Enter your total annual energy usage in kWh:
+            <Input
+              type="number"
+              placeholder="Enter energy usage in kWh"
+              value={annualEnergyUse}
+              onChange={(e) => setAnnualEnergyUse(e.target.value)}
+            />
+          </Label>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Card>
+      <Map/>;
+    </Container>
+  );
+>>>>>>> Stashed changes
 }
 export default LandingPage;
