@@ -1,7 +1,26 @@
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+import React from "react";
+import "./Styles.css"
+import { useState, useEffect} from "react";
+import { useNavigate } from 'react-router-dom';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import axios from 'axios';
+import background from '../assets/solarPanel.jpg'
+import InputPage from './inputPage'
+import OutputPage from './outputPage'
+=======
+>>>>>>> 7f8417c9a44f96a864b3129ea3f7eaa2cedeb99e
 import React, { useState } from "react";
 import styled from 'styled-components';
 import background from '../assets/solarPanel.jpg';
 import './Styles.css';
+<<<<<<< HEAD
+=======
+import Map from './Map';
+>>>>>>> Stashed changes
+>>>>>>> 7f8417c9a44f96a864b3129ea3f7eaa2cedeb99e
 
 // Styled components for layout and styling
 const Container = styled.div`
@@ -102,6 +121,46 @@ const LandingPage = () => {
       <Card>
         <Title>Residential Solar Calculator</Title>
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+    return isLoaded ? (
+        <div className="home">
+            <img src={`${background}`} className="backgroundImage" alt="solar panel background"></img>
+            <h1 className="MainHeader">
+                    Residential Solar Calculator
+            </h1>
+            <form onSubmit={handleSubmit}>
+                
+                <input 
+                    className="addressField"
+                    id = "address"
+                    type="text" 
+                    placeholder="Enter your address"
+                    value={address} 
+                    onChange={handleChange}
+                />
+                <input className="submitAddress" type="submit" value="Submit" />
+
+            </form>
+            <div className="map">    
+            <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={5}
+                onLoad={onLoad}
+                onUnmount={onUnmount}>
+
+            </GoogleMap>
+            
+            </div>
+        </div>
+
+
+    ): <></>
+    }
+=======
+>>>>>>> 7f8417c9a44f96a864b3129ea3f7eaa2cedeb99e
         {/* Form Section */}
         <Form onSubmit={handleSubmit}>
           <Label>
@@ -125,8 +184,15 @@ const LandingPage = () => {
           <Button type="submit">Submit</Button>
         </Form>
       </Card>
+<<<<<<< HEAD
     </Container>
   );
+=======
+      <Map/>;
+    </Container>
+  );
+>>>>>>> Stashed changes
+>>>>>>> 7f8417c9a44f96a864b3129ea3f7eaa2cedeb99e
 }
 
 export default LandingPage;
