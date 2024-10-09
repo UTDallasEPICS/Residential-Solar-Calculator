@@ -23,6 +23,7 @@ def get_system_info():
             print(pvw_result)  
             return jsonify(pvw_result)  # Return the results as JSON
 
+
 # Read the API key from a text file
 #api_file = open("api-keys.txt", "r") 
 #line = api_file.readlines()[0]
