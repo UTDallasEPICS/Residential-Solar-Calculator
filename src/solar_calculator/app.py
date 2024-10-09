@@ -24,13 +24,18 @@ def get_system_info():
             return jsonify(pvw_result)  # Return the results as JSON
 
 # Read the API key from a text file
-api_file = open("api-keys.txt", "r")
-line = api_file.readlines()[0]
-api_key = line.split(',')[1]  # Extract API key from the file
+#api_file = open("api-keys.txt", "r") 
+#line = api_file.readlines()[0]
+#print(line)
+#api_key = line.split(',')[1]  # Extract API key from the file
+api_key = '5cfaHYaMmcrwrpWaI6b3940c9vhzgiTYVG3fB4Sg'
+
+
 
 # Function to process system information using PVWatts API
 def process_system_info(address, annual_energy_use):    
     global results
+    results = "none"
     if address is None or annual_energy_use is None:  # Check if address and annual energy use are provided
         print("No System Info.")
         return results  # Return default results if missing
@@ -103,3 +108,5 @@ def get_pv_cost(pv_system, num_panels, num_batteries):
     panel_cost = (num_panels * 1.8 * 108) + (3270 * pv_system)  # Calculate cost of panels
     battery_cost = 535 * num_batteries  # Calculate cost of batteries
     return (0.7 * (panel_cost + battery_cost))  # Return total cost with a 30% reduction
+
+process_system_info("453 Booth Street, Ottawa ON",10000)
