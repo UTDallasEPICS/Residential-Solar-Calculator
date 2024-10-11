@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
+
+
 const PageContainer = styled.div`
  display: flex;
  flex-direction: column;
@@ -60,10 +62,12 @@ const InfoContent = styled.p`
  text-align: center;
 `;
 
+
+
 const OutputPage = () => {
  const location = useLocation();
- const { PVWResult_JSON } = location.state || {};
-
+ const PVWResult_JSON = location.state;
+ 
  const ac_annual = PVWResult_JSON?.ac_annual || '';
  const capacity_factor = PVWResult_JSON?.capacity_factor || '';
  const num_batteries = PVWResult_JSON?.num_batteries || '';

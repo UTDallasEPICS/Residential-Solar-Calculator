@@ -4,9 +4,10 @@ from location import location  # Assumed to be a custom module for getting locat
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+
 # Initialize Flask application
 app = Flask(__name__)
-CORS(app)  # Enable Cross-Origin Resource Sharing (CORS)
+CORS(app)
 
 # NREL PVWatts API URL
 url = 'https://developer.nrel.gov/api/pvwatts/v8.json'
@@ -29,7 +30,7 @@ def get_system_info():
 #line = api_file.readlines()[0]
 #print(line)
 #api_key = line.split(',')[1]  # Extract API key from the file
-api_key = '5cfaHYaMmcrwrpWaI6b3940c9vhzgiTYVG3fB4Sg'
+api_key = '5R71dZmum882S45MgZalloGoz09TgHORMCSIiWg9'
 
 
 
@@ -43,7 +44,7 @@ def process_system_info(address, annual_energy_use):
 
     loc = location(address)  # Get location details (latitude and longitude) from the 'location' module
     params = {
-        "api_key": 'DEMO_KEY',  # API key for the request
+        "api_key": api_key,  # API key for the request
         "azimuth": 0,  # Azimuth angle for solar panels
         "lat": loc.latitude,  # Latitude of the location
         "lon": loc.longitude,  # Longitude of the location
@@ -109,5 +110,3 @@ def get_pv_cost(pv_system, num_panels, num_batteries):
     panel_cost = (num_panels * 1.8 * 108) + (3270 * pv_system)  # Calculate cost of panels
     battery_cost = 535 * num_batteries  # Calculate cost of batteries
     return (0.7 * (panel_cost + battery_cost))  # Return total cost with a 30% reduction
-
-process_system_info("453 Booth Street, Ottawa ON",10000)

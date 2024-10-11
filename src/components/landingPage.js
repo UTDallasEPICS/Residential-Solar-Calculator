@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import background from '../assets/solarPanel.jpg';
 import './Styles.css';
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 // Styled components for layout and styling
 const Container = styled.div`
@@ -87,14 +89,28 @@ const Button = styled.button`
  }
 `;
 
-const LandingPage = () => {
+
+export const LandingPage = () => {
  const [address, setAddress] = useState("");
  const [annualEnergyUse, setAnnualEnergyUse] = useState('');
+ const navigate = useNavigate()
 
  // Handle form submission (currently a placeholder for functionality)
- const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
    e.preventDefault();
-   console.log('Form Submitted', { address, annualEnergyUse });
+   //console.log('Form Submitted', { address, annualEnergyUse });
+   try{
+     await axios.post('http://127.0.0.1:5000/getSystemInfo', { address, annualEnergyUse })
+       .then((response) => {
+          //console.log("Response is ", response.data)
+          navigate('/outputPage', {state: response.data})
+       })
+   }
+   catch(error){
+      console.log('Error: ', error)
+   }
+   
+   
  };
 
  return (
