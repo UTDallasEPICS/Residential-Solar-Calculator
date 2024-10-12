@@ -4,6 +4,9 @@
   "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
+    "@mantine/charts": "^7.13.2",
+    "@mantine/core": "^7.13.2",
+    "@mantine/hooks": "^7.13.2",
     "@react-google-maps/api": "^2.19.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -16,6 +19,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "recharts": "^2.13.0",
     "styled-components": "^6.1.10",
     "use-places-autocomplete": "^4.0.1",
     "web-vitals": "^2.1.4"
@@ -40,6 +44,9 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "eslint-plugin-flowtype": "^8.0.3"
+    "eslint-plugin-flowtype": "^8.0.3",
+    "postcss": "^8.4.47",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1"
   }
 }

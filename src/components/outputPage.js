@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 
 
+
 const PageContainer = styled.div`
  display: flex;
  flex-direction: column;
@@ -75,6 +76,7 @@ const OutputPage = () => {
  const pv_system = PVWResult_JSON?.pv_system || '';
  const pv_cost = PVWResult_JSON?.pv_cost || '';
  const solrad_annual = PVWResult_JSON?.solrad_annual || '';
+ const monthly_ac = PVWResult_JSON?.ac_monthly || '';
 
  return (
    <PageContainer>
@@ -86,12 +88,12 @@ const OutputPage = () => {
          costs.
        </Text>
        <InfoBox>
-         <InfoTitle>AC Annual</InfoTitle>
-         <InfoContent>{ac_annual} kWh</InfoContent>
+         <InfoTitle>Annual Solar Production</InfoTitle>
+         <InfoContent>{ac_annual.toFixed(2)} kWh</InfoContent>
        </InfoBox>
        <InfoBox>
          <InfoTitle>Capacity Factor</InfoTitle>
-         <InfoContent>{capacity_factor}</InfoContent>
+         <InfoContent>{capacity_factor.toFixed(2)}</InfoContent>
        </InfoBox>
        <InfoBox>
          <InfoTitle>Number of Panels Required</InfoTitle>
@@ -99,11 +101,11 @@ const OutputPage = () => {
        </InfoBox>
        <InfoBox>
          <InfoTitle>Daily Energy Output (kW)</InfoTitle>
-         <InfoContent>{pv_system} kW</InfoContent>
+         <InfoContent>{pv_system.toFixed(2)} kW</InfoContent>
        </InfoBox>
        <InfoBox>
          <InfoTitle>Solar Radiation Annually</InfoTitle>
-         <InfoContent>{solrad_annual} kWh / m² / day</InfoContent>
+         <InfoContent>{solrad_annual.toFixed(2)} kWh / m² / day</InfoContent>
        </InfoBox>
      </Section>
      <Section>
@@ -114,7 +116,7 @@ const OutputPage = () => {
        </Text>
        <InfoBox>
          <InfoTitle>Battery Capacity</InfoTitle>
-         <InfoContent>{capacity_factor} kWh</InfoContent>
+         <InfoContent>{capacity_factor.toFixed(2)} kWh</InfoContent>
        </InfoBox>
        <InfoBox>
          <InfoTitle>Number of Batteries</InfoTitle>
@@ -128,7 +130,7 @@ const OutputPage = () => {
        </Text>
        <InfoBox>
          <InfoTitle>Total Cost</InfoTitle>
-         <InfoContent>${pv_cost}</InfoContent>
+         <InfoContent>${pv_cost.toFixed(2)}</InfoContent>
        </InfoBox>
      </Section>
    </PageContainer>

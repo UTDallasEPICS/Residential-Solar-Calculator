@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import LandingPage from './components/landingPage';
 import About from './components/about';
 import OutputPage from './components/outputPage';
+import SolarProduction from './components/solarProduction';
 import logo from './assets/utdLogo.png'; // Replace with the correct path to your UTD logo
 import iconMenuOpen from './assets/icon_menu_open.png'; // Open menu icon
 import iconMenuClose from './assets/icon_menu_close.png'; // Close menu icon
@@ -47,7 +48,6 @@ function App() {
           <ul className='nav'>
             <li><Link to="/" className='nav-item'>Home</Link></li>
             <li><Link to="/About" className='nav-item'>About Us</Link></li>
-            <li><Link to="/outputPage" className='nav-item'>Output Page</Link></li>
           </ul>
         </nav>
       </header>
@@ -58,6 +58,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/About" element={<About />} />
           <Route path="/outputPage" element={<OutputPage />} />
+          <Route path="/solarProduction" element={<SolarProduction />} />
         </Routes>
       </main> 
     </div>

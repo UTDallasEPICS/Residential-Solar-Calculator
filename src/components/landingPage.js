@@ -103,7 +103,7 @@ export const LandingPage = () => {
      await axios.post('http://127.0.0.1:5000/getSystemInfo', { address, annualEnergyUse })
        .then((response) => {
           //console.log("Response is ", response.data)
-          navigate('/outputPage', {state: response.data})
+          navigate('/solarProduction', {state: {response : response.data, annualEnergyUse : annualEnergyUse}})
        })
    }
    catch(error){

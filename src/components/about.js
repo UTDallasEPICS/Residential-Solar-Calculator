@@ -65,7 +65,7 @@ const AboutUsPage = () => (
         <Link href="https://sustainability.utdallas.edu/">UTD Office of Sustainability</Link>
       </Text>
       <SubTitle>The Team</SubTitle>
-      <TeamMember>Samiksha — Project Liaison</TeamMember>
+      <TeamMember>Samikshaa — Project Liaison</TeamMember>
       <TeamMember>Qays — Web Master</TeamMember>
       <TeamMember>Alp — Web Master</TeamMember>
       <TeamMember>Rohin Raina — Project Lead and Web Master</TeamMember>

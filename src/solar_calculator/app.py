@@ -69,6 +69,7 @@ def process_system_info(address, annual_energy_use):
         ac_annual = data['outputs']['ac_annual']  # Annual AC energy output in kWh       
         solrad_annual = data['outputs']['solrad_annual']  # Annual solar radiation
         capacity_factor = data['outputs']['capacity_factor']  # Capacity factor
+        monthly_ac = data['outputs']['ac_monthly']
 
         # Calculate additional system details
         pv_system = get_pv_system(annual_energy_use)  # Calculate PV system size
@@ -84,12 +85,14 @@ def process_system_info(address, annual_energy_use):
             "pv_system": pv_system,
             "num_panels": num_panels,
             "num_batteries": num_batteries,
-            "pv_cost": pv_cost
+            "pv_cost": pv_cost,
+            "monthly_ac" : monthly_ac
         }
         # Print estimated results
         print(f"\nEstimated annual AC energy production: {ac_annual} kWh")
         print(f"Estimated annual solar radiation: {solrad_annual}")
         print(f"Estimated annual solar radiation: {capacity_factor}")
+        print(f"Monthly: {monthly_ac}" )
     
         return results
 
