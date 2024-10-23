@@ -91,10 +91,9 @@ def process_system_info(address, annual_energy_use):
         print(f"Estimated annual solar radiation: {capacity_factor}")
     
         return results
-
-# Function to estimate the PV system size based on annual energy use
+# Function to calculate the PV system size
 def get_pv_system(annual_energy_use):
-    return (((annual_energy_use / 365) * 1.29)/ 5.07)
+    return (((annual_energy_use / 365) * 1.29) / 5.07)
 
 # Function to calculate the number of solar panels needed
 def get_num_panels(pv_system):
@@ -104,10 +103,27 @@ def get_num_panels(pv_system):
 def get_num_batteries(pv_system):
     return round(((pv_system * 3) / 4.8), 0)
 
-# Function to calculate the total cost of the PV system
+# Function to calculate the total cost of the PV system, rounded to 2 decimal points
 def get_pv_cost(pv_system, num_panels, num_batteries):
     panel_cost = (num_panels * 1.8 * 108) + (3270 * pv_system)  # Calculate cost of panels
     battery_cost = 535 * num_batteries  # Calculate cost of batteries
-    return (0.7 * (panel_cost + battery_cost))  # Return total cost with a 30% reduction
+    total_cost = (0.7 * (panel_cost + battery_cost))  # Calculate total cost with 30% reduction
+    return round(total_cost, 2)  # Round the result to 2 decimal points
 
-process_system_info("453 Booth Street, Ottawa ON",10000)
+# Function to process the PV system info
+def process_system_info(address, annual_energy_use):
+    pv_system = get_pv_system(annual_energy_use)
+    num_panels = get_num_panels(pv_system)
+    num_batteries = get_num_batteries(pv_system)
+    total_cost = get_pv_cost(pv_system, num_panels, num_batteries)
+    
+    # Output the results
+    print(f"Address: {address}")
+    print(f"Annual Energy Use: {annual_energy_use} kWh")
+    print(f"PV System Size: {pv_system:.3f} kW")
+    print(f"Number of Panels: {num_panels}")
+    print(f"Number of Batteries: {num_batteries}")
+    print(f"Total Cost: ${total_cost:.2f}")
+
+# Example usage
+process_system_info("453 Booth Street, Ottawa ON", 10000)
