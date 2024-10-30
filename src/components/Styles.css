@@ -1,3 +1,15 @@
+/* Base Styles */
+:root {
+    --primary-color: #154734;
+    --hover-color: #e2a221;
+    --active-color: #e2a221;
+    --background-color: #f7f7f7;
+    --text-color: #333;
+    --highlight-color: yellow;
+    --white: #ffffff;
+}
+
+/* General Styles */
 .home {
     display: block;
     width: auto;
@@ -16,7 +28,7 @@
     margin-top: 5vh;
     color: #ffffff;
     font: "calibri";
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     align-self: auto;
     text-align: center;
 }
@@ -26,11 +38,13 @@
     width: 40vw;
     margin: auto;
 }
+
 .go {
     position: relative;
     width: 40vw;
     margin: auto;
 }
+
 .addressField {
     border-style: none;
     background-color: #ffffff;
@@ -43,16 +57,16 @@
     padding-left: 1vw;
     padding-right: 3vw;
     font: "calibri";
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: medium;
     width: 80%;
     overflow: scroll;
 }
+
 .addressField:focus {
     outline-style: none;
     border-width: 0;
     border-color: #c6c6c6;
-
 }
 
 .submitAddress {
@@ -63,7 +77,7 @@
     padding-right: 1vw;
     border-radius: 20px;
     background-color: #e2a221;
-    border-style: outselt;
+    border-style: outset;
     border-color: #dd9e76;
     color: white;
     font-weight: bold;
@@ -75,9 +89,107 @@
 .submitAddress:hover {
     color: black;
 }
+
 .map {
     position: center;
     margin: 0 auto;
     padding-left: 35vw;
     padding-top: 20vw;
+}
+
+/* FAQ Section Styles */
+.faq-section {
+    margin: 20px auto;
+    width: 80%; /* Increased width */
+    background-color: var(--white);
+    box-shadow: 0 7px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 15px; /* Rounded corners for the section */
+    padding: 20px; /* Added padding for a better look */
+}
+
+.faq-question {
+    background-color: #154734; 
+    color: #fff;
+    padding: 15px 20px; /* Increased padding for better spacing */
+    font-size: 1.5em; /* Increased font size for better readability */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0; /* Added margin to create space between questions */
+    border-radius: 10px; /* Rounded corners for the questions */
+}
+
+.faq-question:hover {
+    background-color: var(--hover-color);
+}
+
+.faq-question.active {
+    background-color: var(--active-color);
+}
+
+.faq-answer {
+    display: none;
+    max-height: 0;
+    overflow-y: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    background-color: var(--white);
+    color: var(--text-color);
+    border-radius: 20px; /* Rounded corners for the answer section */
+    padding: 20px;
+    position: relative;
+    border: 2px solid #154734; /* Added border with the specified color */
+}
+
+
+.faq-answer.expanded {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.expand-button {
+    cursor: pointer;
+    color: var(--primary-color);
+    background-color: var(--hover-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px; /* Rounded corners for the button */
+    font-weight: bold;
+    font-size: 1em;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.expand-button:hover {
+    background-color: #d19c1f;
+    transform: scale(1.05);
+}
+
+.faq-answer p {
+    margin: 0;
+    padding: 10px 0;
+}
+
+mark {
+    background-color: var(--highlight-color);
+    padding: 0;
+}
+
+#no-results {
+    display: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .faq-section {
+        width: 90%; /* Adjusted for smaller screens */
+    }
 }
