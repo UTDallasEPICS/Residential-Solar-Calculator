@@ -14,7 +14,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "styled-components": "^6.1.10",
     "use-places-autocomplete": "^4.0.1",
     "web-vitals": "^2.1.4"
@@ -40,5 +40,6 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "eslint-plugin-flowtype": "^8.0.3"
-  }
+  },
+  "packageManager": "yarn@4.5.0+sha512.837566d24eec14ec0f5f1411adb544e892b3454255e61fdef8fd05f3429480102806bac7446bc9daff3896b01ae4b62d00096c7e989f1596f2af10b927532f39"
 }
