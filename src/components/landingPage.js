@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 import background from '../assets/solarPanel.jpg';
 import './Styles.css';
 
@@ -87,35 +88,36 @@ const Button = styled.button`
   }
 `;
 
-const getCosts = async (aress, energy) => {
-  const address = aress;
-  const annualEnergyUse = energy;
-  
-  try {
-    const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'  // Add this header
-      },
-      body: JSON.stringify({ 
-        address: address,
-        annualEnergyUse: annualEnergyUse
-      })
-    });
-
-    const result = await response.json();
-    console.log("Result from Python:", result);  // Corrected to console.log
-  } catch (error) {
-    console.error("Error calling Python function:", error);
-  }
-};
-
-
 const LandingPage = () => {
   const [address, setAddress] = useState("");
-  const [annualEnergyUse, setAnnualEnergyUse] = useState('');
+  const [annualEnergyUse, setAnnualEnergyUse] = useState("");
+  const navigate = useNavigate();  // Initialize useNavigate
 
-  // Handle form submission (currently a placeholder for functionality)
+  // Modified getCosts function to navigate after fetching data
+  const getCosts = async (aress, energy) => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          address: aress,
+          annualEnergyUse: energy
+        })
+      });
+
+      const result = await response.json();
+      console.log("Result from Python:", result);
+
+      // Navigate to OutputPage with result as state
+      navigate('/outputPage', { state: { PVWResult_JSON: result } });
+
+    } catch (error) {
+      console.error("Error calling Python function:", error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Submitted', { address, annualEnergyUse });
@@ -152,6 +154,6 @@ const LandingPage = () => {
       </Card>
     </Container>
   );
-}
+};
 
 export default LandingPage;

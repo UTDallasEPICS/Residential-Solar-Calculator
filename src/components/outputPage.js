@@ -69,7 +69,7 @@ const OutputPage = () => {
   const num_batteries = PVWResult_JSON?.num_batteries || '';
   const num_panels = PVWResult_JSON?.num_panels || '';
   const pv_system = PVWResult_JSON?.pv_system || '';
-  const pv_cost = PVWResult_JSON?.pv_cost || '';
+  const pv_system_cost = PVWResult_JSON?.pv_system_cost || '';
   const solrad_annual = PVWResult_JSON?.solrad_annual || '';
 
   return (
@@ -81,28 +81,28 @@ const OutputPage = () => {
           based on the annual energy usage input. It may include details like total kW needed and estimated
           costs.
         </Text>
-        <InfoBox>
+        {/* <InfoBox>
           <InfoTitle>AC Annual</InfoTitle>
           <InfoContent>{ac_annual} kWh</InfoContent>
         </InfoBox>
         <InfoBox>
           <InfoTitle>Capacity Factor</InfoTitle>
           <InfoContent>{capacity_factor}</InfoContent>
-        </InfoBox>
+        </InfoBox> */}
         <InfoBox>
           <InfoTitle>Number of Panels Required</InfoTitle>
-          <InfoContent>{num_panels} panels</InfoContent>
+          <InfoContent>{num_panels[0]} - {num_panels[1]} panels</InfoContent>
         </InfoBox>
-        <InfoBox>
+        {/* <InfoBox>
           <InfoTitle>Daily Energy Output (kW)</InfoTitle>
           <InfoContent>{pv_system} kW</InfoContent>
-        </InfoBox>
-        <InfoBox>
+        </InfoBox> */}
+        {/* <InfoBox>
           <InfoTitle>Solar Radiation Annually</InfoTitle>
           <InfoContent>{solrad_annual} kWh / m² / day</InfoContent>
-        </InfoBox>
+        </InfoBox> */}
       </Section>
-      <Section>
+      {/* <Section>
         <Title>Battery Sizing</Title>
         <Text>
           Here, the required battery size to support the solar system will be shown. This
@@ -116,7 +116,7 @@ const OutputPage = () => {
           <InfoTitle>Number of Batteries</InfoTitle>
           <InfoContent>{num_batteries} batteries</InfoContent>
         </InfoBox>
-      </Section>
+      </Section> */}
       <Section>
         <Title>Total Cost</Title>
         <Text>
@@ -124,7 +124,7 @@ const OutputPage = () => {
         </Text>
         <InfoBox>
           <InfoTitle>Total Cost</InfoTitle>
-          <InfoContent>${pv_cost}</InfoContent>
+          <InfoContent>${pv_system_cost[0]} - ${pv_system_cost[1]}</InfoContent>
         </InfoBox>
       </Section>
     </PageContainer>
