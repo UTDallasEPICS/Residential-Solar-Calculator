@@ -31,11 +31,6 @@ def get_system_info():
             pvw_result = process_system_info(address, annual_energy_use)  # Process the information
             print(pvw_result)  
             return jsonify(pvw_result)  # Return the results as JSON
-        x = {'Name':"geek", 
-            "Age":"22",
-            "Date":123, 
-            "programming":"python"}
-        return x
 
 
 # Read the API key from a text file
@@ -149,3 +144,4 @@ if __name__ == '__main__':
     app.run(debug=True)
 #print(process_system_info("453 Booth Street, Ottawa ON",10000)["pv_cost"])
 #get_system_info("1600 Pennsylvania Ave, Dallas, TX 75201",12000)
+	
