@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 import background from '../assets/solarPanel.jpg';
 import './Styles.css';
-import Map from './Map';
 
 // Styled components for layout and styling
 const Container = styled.div`
@@ -90,12 +90,38 @@ const Button = styled.button`
 
 const LandingPage = () => {
   const [address, setAddress] = useState("");
-  const [annualEnergyUse, setAnnualEnergyUse] = useState('');
+  const [annualEnergyUse, setAnnualEnergyUse] = useState("");
+  const navigate = useNavigate();  // Initialize useNavigate
 
-  // Handle form submission (currently a placeholder for functionality)
+  // Modified getCosts function to navigate after fetching data
+  const getCosts = async (a, e) => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          address: a,
+          annualEnergyUse: e
+        })
+      });
+
+      const result = await response.json();
+      console.log("Result from Python:", result);
+
+      // Navigate to OutputPage with result as state
+      navigate('/outputPage', { state: { PVWResult_JSON: result } });
+
+    } catch (error) {
+      console.error("Error calling Python function:", error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Submitted', { address, annualEnergyUse });
+    getCosts(address, annualEnergyUse);
   };
 
   return (
@@ -126,9 +152,9 @@ const LandingPage = () => {
           <Button type="submit">Submit</Button>
         </Form>
       </Card>
-      <Map/>;
     </Container>
   );
-}
+};
 
 export default LandingPage;
+	
