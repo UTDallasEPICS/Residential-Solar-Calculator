@@ -92,7 +92,7 @@ const SolarProduction = () => {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [
                 {
-                    label: 'Cost',
+                    label: 'kWh',
                     data: monthlyProdData,
                     backgroundColor: [
                         'rgba(255, 159, 64, 0.2)',
@@ -252,7 +252,7 @@ const SolarProduction = () => {
                         </div>
                     </div>
 
-                    <div className="flex h-full mt-4 ml-8">
+                    <div className="flex h-full mt-4 ml-4">
                         <div className="w-1/3 m-4">
                             <div className="h-80 border border-slate-200 m-auto position-relative flex flex-col">
                                 <div className="mt-4 ml-4 font-light text-xl text-gray-500">Total Investment</div>
