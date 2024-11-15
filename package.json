@@ -4,23 +4,25 @@
   "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
-    "@mantine/charts": "^7.13.2",
-    "@mantine/core": "^7.13.2",
-    "@mantine/hooks": "^7.13.2",
     "@react-google-maps/api": "^2.19.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@trimblemaps/trimblemaps-js": "^3.19.0",
     "axios": "^1.6.8",
+    "chart.js": "^4.4.6",
+    "chartjs-plugin-annotation": "^3.1.0",
     "flask": "^0.2.10",
     "location": "^0.0.1",
+    "prettier": "^3.3.3",
+    "primereact": "^10.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
     "recharts": "^2.13.0",
     "styled-components": "^6.1.10",
+    "tailwindcss": "^3.4.15",
     "use-places-autocomplete": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -28,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./public/styles.css --watch",
+    "prettier": "npx prettier --write **/*.html"
   },
   "browserslist": {
     "production": [
@@ -48,5 +52,17 @@
     "postcss": "^8.4.47",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1"
+  },
+  "description": "### `flask run`",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UTDallasEPICS/Residential-Solar-Calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UTDallasEPICS/Residential-Solar-Calculator/issues"
   }
 }
