@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from "react";
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
+import RoundSlider from "./Styles.css";
 
 const PageContainer = styled.div`
   display: flex;
@@ -60,6 +61,8 @@ const InfoContent = styled.p`
   text-align: center;
 `;
 
+
+
 const OutputPage = () => {
   const location = useLocation();
   const { PVWResult_JSON } = location.state || {};
@@ -72,7 +75,20 @@ const OutputPage = () => {
   const pv_system_cost = PVWResult_JSON?.pv_system_cost || '';
   const solrad_annual = PVWResult_JSON?.solrad_annual || '';
 
+  function updateSliderValue(slider) {
+    const value = slider.value;
+    document.getElementById('sliderValue').textContent = value;
+    slider.style.setProperty('--value', value);
+  }
+  
+  const [value, setValue] = useState(100); // Initial slider value
+  
+  const handleSliderChange = (e) => {
+    setValue(e.target.value);
+  };
+
   return (
+    
     <PageContainer>
       <Section>
         <Title>Solar Sizing Summary</Title>
@@ -91,7 +107,7 @@ const OutputPage = () => {
         </InfoBox> */}
         <InfoBox>
           <InfoTitle>Number of Panels Required</InfoTitle>
-          <InfoContent>{num_panels[0]} - {num_panels[1]} panels</InfoContent>
+          <InfoContent>{Math.ceil((value/100) * num_panels[0])} - {Math.ceil((value/100) * num_panels[1])} panels</InfoContent>
         </InfoBox>
         {/* <InfoBox>
           <InfoTitle>Daily Energy Output (kW)</InfoTitle>
@@ -124,9 +140,14 @@ const OutputPage = () => {
         </Text>
         <InfoBox>
           <InfoTitle>Total Cost</InfoTitle>
-          <InfoContent>${pv_system_cost[0]} - ${pv_system_cost[1]}</InfoContent>
+          <InfoContent>${Math.ceil((value/100) * pv_system_cost[0])} - ${Math.ceil((value/100) * pv_system_cost[1])}</InfoContent>
         </InfoBox>
+        
       </Section>
+      <div className="slider-container">
+          <div className="slider-value">{value}% Coverage</div>
+          <input type="range" min="1" max="100" value={value} className="slider" style={{ "--value": value }} onChange={handleSliderChange}/>
+        </div>
     </PageContainer>
   );
 };
