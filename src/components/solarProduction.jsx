@@ -14,8 +14,6 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 import { useLocation } from 'react-router-dom';
 
 
-
-
 const SolarProduction = () => {
     Chart.register(annotationPlugin);
 
@@ -202,12 +200,16 @@ const SolarProduction = () => {
                                     <label htmlFor="option1" className="ml-2">Only Panels</label>
                                 </div>
                                 <div className="flex align-items-center ml-1">
-                                    <RadioButton inputId="option2" checked disabled value="batteries" onChange={(e) => setComponents(e.value)} checked={components === 'batteries'} />
+                                    <RadioButton inputId="option2" disabled value="batteries" onChange={(e) => setComponents(e.value)} checked={components === 'batteries'} />
                                     <label htmlFor="option2" className="ml-2">Panels & Batteries</label>
                                 </div>
                                 <div className="flex align-items-center ml-1">
-                                    <RadioButton inputId="option3" checked disabled value="inverters" onChange={(e) => setComponents(e.value)} checked={components === 'inverters'} />
+                                    <RadioButton inputId="option3" disabled value="inverters" onChange={(e) => setComponents(e.value)} checked={components === 'inverters'} />
                                     <label htmlFor="option3" className="ml-2">Panels & Inverters</label>
+                                </div>
+                                <div className="flex align-items-center ml-1">
+                                    <RadioButton inputId="option4" disabled value="all" onChange={(e) => setComponents(e.value)} checked={components === 'all'} />
+                                    <label htmlFor="option4" className="ml-2">Panels, Batteries, & Inverters</label>
                                 </div>
                             </div>
                         </div>
