@@ -91,7 +91,7 @@ const Button = styled.button`
 const LandingPage = () => {
   const [address, setAddress] = useState("");
   const [annualEnergyUse, setAnnualEnergyUse] = useState("");
-  const [solarPanelCapacity, setSolarPanelCapacity] = useState(""); // New state for solar panel capacity
+  const [solarPanelCapacity, setSolarPanelCapacity] = useState(370); // New state for solar panel capacity
   const navigate = useNavigate();
 
   // Modified getCosts function to navigate after fetching data
