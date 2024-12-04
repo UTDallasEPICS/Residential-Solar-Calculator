@@ -120,26 +120,35 @@ export const LandingPage = () => {
 
        {/* Form Section */}
        <Form onSubmit={handleSubmit}>
-         <Label>
-           Enter your address:
-           <Input
-             type="text"
-             placeholder="Enter your address"
-             value={address}
-             onChange={(e) => setAddress(e.target.value)}
-           />
-         </Label>
-         <Label>
-           Enter your total annual energy usage in kWh:
-           <Input
-             type="number"
-             placeholder="Enter energy usage in kWh"
-             value={annualEnergyUse}
-             onChange={(e) => setAnnualEnergyUse(e.target.value)}
-           />
-         </Label>
-         <Button type="submit">Submit</Button>
-       </Form>
+          <Label>
+            Enter your address:
+            <Input
+              type="text"
+              placeholder="Enter your address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </Label>
+          <Label>
+            Enter your total annual energy usage in kWh:
+            <Input
+              type="number"
+              placeholder="Enter energy usage in kWh"
+              value={annualEnergyUse}
+              onChange={(e) => setAnnualEnergyUse(e.target.value)}
+            />
+          </Label>
+          <Label>
+            Enter the wattage of the solar panel (in W):
+            <Input
+              type="number"
+              placeholder="Enter solar panel wattage in W"
+              value={solarPanelCapacity}
+              onChange={(e) => setSolarPanelCapacity(e.target.value)}
+            />
+          </Label>
+          <Button type="submit">Submit</Button>
+        </Form>
      </Card>
    </Container>
  );
