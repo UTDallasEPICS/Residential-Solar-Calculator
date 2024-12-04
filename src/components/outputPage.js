@@ -72,6 +72,7 @@ const OutputPage = () => {
   const num_batteries = PVWResult_JSON?.num_batteries || '';
   const num_panels = PVWResult_JSON?.num_panels || '';
   const pv_system = PVWResult_JSON?.pv_system || '';
+  const panel_cost = PVWResult_JSON?.panel_cost || ''
   const pv_system_cost = PVWResult_JSON?.pv_system_cost || '';
   const solrad_annual = PVWResult_JSON?.solrad_annual || '';
 
@@ -140,7 +141,7 @@ const OutputPage = () => {
         </Text>
         <InfoBox>
           <InfoTitle>Total Cost</InfoTitle>
-          <InfoContent>${Math.ceil((value/100) * pv_system_cost[0])} - ${Math.ceil((value/100) * pv_system_cost[1])}</InfoContent>
+          <InfoContent>${Math.ceil((value/100) * num_panels[0]) * panel_cost} - ${Math.ceil((value/100) * num_panels[1]) * panel_cost}</InfoContent>
         </InfoBox>
         
       </Section>

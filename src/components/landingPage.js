@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import background from '../assets/solarPanel.jpg';
 import './Styles.css';
 
@@ -26,8 +26,8 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px; // Ensures the card doesn't exceed a reasonable size
-  margin: 20px auto; // Centers the card horizontally
+  max-width: 500px;
+  margin: 20px auto;
   text-align: center;
   box-sizing: border-box;
 `;
@@ -91,10 +91,11 @@ const Button = styled.button`
 const LandingPage = () => {
   const [address, setAddress] = useState("");
   const [annualEnergyUse, setAnnualEnergyUse] = useState("");
-  const navigate = useNavigate();  // Initialize useNavigate
+  const [solarPanelCapacity, setSolarPanelCapacity] = useState(""); // New state for solar panel capacity
+  const navigate = useNavigate();
 
   // Modified getCosts function to navigate after fetching data
-  const getCosts = async (aress, energy) => {
+  const getCosts = async (aress, energy, capacity) => {
     try {
       const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
         method: 'POST',
@@ -103,7 +104,8 @@ const LandingPage = () => {
         },
         body: JSON.stringify({ 
           address: aress,
-          annualEnergyUse: energy
+          annualEnergyUse: energy,
+          solarPanelCapacity: capacity // Include solar panel capacity in the request
         })
       });
 
@@ -120,8 +122,8 @@ const LandingPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form Submitted', { address, annualEnergyUse });
-    getCosts(address, annualEnergyUse);
+    console.log('Form Submitted', { address, annualEnergyUse, solarPanelCapacity });
+    getCosts(address, annualEnergyUse, solarPanelCapacity);
   };
 
   return (
@@ -147,6 +149,15 @@ const LandingPage = () => {
               placeholder="Enter energy usage in kWh"
               value={annualEnergyUse}
               onChange={(e) => setAnnualEnergyUse(e.target.value)}
+            />
+          </Label>
+          <Label>
+            Enter the capacity of the solar panel (in kW):
+            <Input
+              type="number"
+              placeholder="Enter solar panel capacity in kW"
+              value={solarPanelCapacity}
+              onChange={(e) => setSolarPanelCapacity(e.target.value)}
             />
           </Label>
           <Button type="submit">Submit</Button>

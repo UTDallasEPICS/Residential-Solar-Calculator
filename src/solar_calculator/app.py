@@ -27,8 +27,9 @@ def get_system_info():
         data = request.json  # Get JSON data from the request
         address = data.get('address')  # Extract 'address' from request data
         annual_energy_use = int(data.get('annualEnergyUse'))  # Extract 'annualEnergyUse' and convert to integer
+        solarPanelCapacity = int(data.get('solarPanelCapacity'))
         if address or annual_energy_use is not None:  # Check if address or annual energy use is provided
-            pvw_result = process_system_info(address, annual_energy_use)  # Process the information
+            pvw_result = process_system_info(address, annual_energy_use, solarPanelCapacity)  # Process the information
             print(pvw_result)  
             return jsonify(pvw_result)  # Return the results as JSON
 
@@ -46,7 +47,9 @@ api_key = '5cfaHYaMmcrwrpWaI6b3940c9vhzgiTYVG3fB4Sg'
 
 
 # Function to process system information using PVWatts API
-def process_system_info(address, annual_energy_use):    
+def process_system_info(address, annual_energy_use, solarPanelCapacity):  
+    if solarPanelCapacity > 0:
+            ppr = solarPanelCapacity/1000.0  
     global results
     results = "none"
     if address is None or annual_energy_use is None:  # Check if address and annual energy use are provided
@@ -56,11 +59,11 @@ def process_system_info(address, annual_energy_use):
 
     loc = location(address)  # Get location details (latitude and longitude) from the 'location' module
     params_min = {
-        "api_key": 'DEMO_KEY',  # API key for the request
+        "api_key": '5cfaHYaMmcrwrpWaI6b3940c9vhzgiTYVG3fB4Sg',  # API key for the request
         "azimuth": 180,  # Azimuth angle for solar panels (0 for true north, 90 for east, 180 for south, and 270 for west)
         "lat": loc.latitude,  # Latitude of the location
         "lon": loc.longitude,  # Longitude of the location
-        "system_capacity": 0.375,  # System capacity in kW
+        "system_capacity": ppr,  # System capacity in kW
         "losses": 14,  # Estimated system losses (%)
         "array_type": 1,  # Fixed tilt array type
         "module_type": 0,  # Standard module type
@@ -78,7 +81,7 @@ def process_system_info(address, annual_energy_use):
     data_min = response.json()  # Convert response to JSON format
     data_max = response2.json()  # Convert response to JSON format
    
-    # Check if the response contains necessary data
+    # Check if the response contains necessary datas
     if 'outputs' in data_min and 'ac_annual' in data_min['outputs']:
         ac_annual_min = data_min['outputs']['ac_annual']  # Annual AC energy output in kWh  
         ac_annual_max = data_max['outputs']['ac_annual']
@@ -97,6 +100,7 @@ def process_system_info(address, annual_energy_use):
         results = {
             "ac_monthly" : ac_monthly,
             "ac_annual": ac_annual_min,
+            "panel_cost": cost_perW * ppr * 1000,
             #"solrad_monthly": solrad_monthly,
             #"capacity_factor": capacity_factor,
             #"pv_system": pv_system,
