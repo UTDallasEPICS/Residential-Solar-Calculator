@@ -152,10 +152,10 @@ const LandingPage = () => {
             />
           </Label>
           <Label>
-            Enter the capacity of the solar panel (in kW):
+            Enter the wattage of the solar panel (in W):
             <Input
               type="number"
-              placeholder="Enter solar panel capacity in kW"
+              placeholder="Enter solar panel wattage in W"
               value={solarPanelCapacity}
               onChange={(e) => setSolarPanelCapacity(e.target.value)}
             />

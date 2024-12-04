@@ -141,7 +141,7 @@ const OutputPage = () => {
         </Text>
         <InfoBox>
           <InfoTitle>Total Cost</InfoTitle>
-          <InfoContent>${Math.ceil((value/100) * num_panels[0]) * panel_cost} - ${Math.ceil((value/100) * num_panels[1]) * panel_cost}</InfoContent>
+          <InfoContent>${Math.round((Math.ceil((value/100) * num_panels[0]) * panel_cost),2)} - ${Math.round((Math.ceil((value/100) * num_panels[1]) * panel_cost),2)}</InfoContent>
         </InfoBox>
         
       </Section>
