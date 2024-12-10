@@ -183,9 +183,8 @@ const FAQ = () => {
                             {faq.question}
                         </div>
                         <div
-                            className="faq-answer"
+                            className={`faq-answer ${expandedIndex === index ? 'active' : ''}`}
                             data-original-text={faq.answer}
-                            style={{ display: expandedIndex === index ? 'block' : 'none' }}
                         >
                             {faq.answer}
                         </div>

@@ -167,9 +167,23 @@
     transform: scale(1.05);
 }
 
-.faq-answer p {
-    margin: 0;
-    padding: 10px 0;
+.faq-answer {
+    display: none; /* Default state hidden */
+    padding: 10px;
+    background-color: #f9f9f9;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+    overflow: visible; /* Ensures the full content is visible */
+    white-space: normal; /* Allows text to wrap to the next line */
+}
+
+.faq-answer.active {
+    display: block;
+    max-height: 100%; /* Ensure it grows naturally */
+    padding: 20px; /* Add padding for a better look */
+    transition: all 0.3s ease; /* Smooth opening transition */
 }
 
 mark {
