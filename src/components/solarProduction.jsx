@@ -167,58 +167,55 @@ const SolarProduction = () => {
 
     return (
         <PrimeReactProvider value={{ unstyled: true }}>
-            <section id="layout" className="flex mb-4  h-screen bg-white">
-                <div className="w-1/6 flex flex-col items-center gap-4 h-screen overflow-hidden bg-slate-100">
-                    <div className="text-light text-xl text-center text-gray-500 mt-8">
-                        Advanced Settings
+            <section id="layout" className="flex h-screen bg-white">
+                <div className="w-1/4 p-6 bg-gradient-to-b from-gray-100 to-gray-200 shadow-xl rounded-l-lg h-screen overflow-hidden">
+                    <div className="text-center mb-8">
+                        <h2 className="text-2xl font-semibold text-gray-800">Advanced Settings</h2>
                     </div>
-                    <Card>
-                        <div className="bg-white border border-slate-300 h-1/2 w-full text-slate-400 ml-4">
-                            <div className="flex items-center justify-center p-2 m-2">
-                                <div className="grid grid-rows-3">
-                                    <div className="text-sm text-gray-500 font-light">
-                                        Coverage By Solar
-                                    </div>
-                                    <div className="flex justify-end">
-                                        <Knob
-                                            ptOptions={{ mergeSections: false }}
-                                            pt={{
-                                                range: 'stroke-current transition duration-100 ease-in stroke-gray-200 dark:stroke-gray-700 fill-none',
-                                                value: 'animate-dash-frame  stroke-blue-500 fill-none',
-                                                label: 'text-center text-xl'
-                                            }}
-                                            min={0}
-                                            max={100}
-                                            value={consumption}
-                                            onChange={(e) => setConsumption(e.value)}
-                                            strokeWidth={6}
-                                        /> 
-                                    </div>
-                                    <div className="flex items-center justify-center text-center">
-                                        <div>
-                                            <div>
-                                                <InputNumber value={consumption} onValueChange={(e) => setConsumption(e.value)} min={0} max={100} suffix="%" size="5" inputClassName="text-center" />
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
+                    <Card className="p-6 bg-white rounded-lg shadow-md mb-6">
+                        <div className="flex flex-col items-center text-center space-y-4">
+                            <div className="text-sm text-gray-500 font-semibold">Coverage By Solar</div>
+                            <div className="flex flex-col items-center space-y-2">
+                                <Knob
+                                    ptOptions={{ mergeSections: false }}
+                                    pt={{
+                                        range: 'stroke-current transition duration-100 ease-in stroke-gray-200 dark:stroke-gray-700 fill-none',
+                                        value: 'animate-dash-frame stroke-blue-500 fill-none',
+                                        label: 'text-center text-xl'
+                                    }}
+                                    min={0}
+                                    max={100}
+                                    value={consumption}
+                                    onChange={(e) => setConsumption(e.value)}
+                                    strokeWidth={6}
+                                    style={{ width: '80px', height: '80px', marginRight: '15px' }}
+                                />
+                                <InputNumber
+                                    value={consumption}
+                                    onValueChange={(e) => setConsumption(e.value)}
+                                    min={0}
+                                    max={100}
+                                    suffix="%"
+                                    size="5"
+                                    inputClassName="text-center w-16 text-black mt-2 ml-3"
+                                />
+                            </div>
                         </div>
                     </Card>
 
-                    <Card>
-                        <div className="bg-white border border-slate-300 h-1/2 w-5/6 p-4 text-slate-400 mb-4 ml-4">
-                            <div className="flex flex-wrap gap-3">
-                                <div className="text-sm text-gray-500 font-light">Solar Energy System</div>
-                                <div className="flex align-items-center mt-3 ml-1">
-                                    <RadioButton inputId="option1" value="neither" onChange={(e) => setComponents(e.value)} checked={components === 'solar'} />
-                                    <label htmlFor="option1" className="ml-2">Solar Only</label>
+                    <Card className="p-4 bg-white rounded-lg shadow-md">
+                        <div className="flex flex-col gap-4">
+                            <div className="text-sm text-gray-500 font-semibold">Solar Energy System</div>
+
+                            <div className="flex flex-col gap-3">
+                                <div className="flex items-center">
+                                    <RadioButton inputId="option1" value="solar" onChange={(e) => setComponents(e.value)} checked={components === 'solar'} />
+                                    <label htmlFor="option1" className="ml-2 text-gray-700">Solar Only</label>
                                 </div>
-                                <div className="flex align-items-center ml-1">
-                                    <RadioButton inputId="option2" disabled value="batteries" onChange={(e) => setComponents(e.value)} checked={components === 'battery'} />
-                                    <label htmlFor="option2" className="ml-2">Battery Backup</label>
+                                <div className="flex items-center">
+                                    <RadioButton inputId="option2" value="battery" onChange={(e) => setComponents(e.value)} checked={components === 'battery'} />
+                                    <label htmlFor="option2" className="ml-2 text-gray-700">Battery Backup</label>
                                 </div>
                             </div>
                         </div>
@@ -287,17 +284,15 @@ const SolarProduction = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-2/3 m-4">
-                            <div className=" h-2/3 m-auto border border-slate-200 position-relative object-scale-down">
-                                <div className="m-4 text-xl text-gray-500 font-light text-center">Estimated Monthly Solar Production</div>
-                                <div className="w-5/6 m-auto">
-                                    <PrimeChart type="bar" data={barData} options={barOptions} className="md:w-30rem ml-8 mr-8" />
-                                </div>
 
+                        <div className="w-full sm:w-2/3 p-4">
+                            <div className="h-[500px] border border-slate-200 flex flex-col p-4">
+                                <div className="text-xl text-gray-500 font-light text-center">Estimated Monthly Solar Production</div>
+                                <div className="w-full h-full mt-4">
+                                    <PrimeChart type="bar" data={barData} options={barOptions} className="w-full h-full" />
+                                </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </section >
