@@ -18,7 +18,7 @@ url = 'https://developer.nrel.gov/api/pvwatts/v8.json'
 ##Constants
 ppr = 0.375 #power panel rating of LG NeON 2 solar panels in kW
 cost_perW = 2.75 #average cost for a solar panel per watt of power panel rating in dollars
-
+batt_cost_perkW = 250 #average cost for a 1kW battery
 
 # Flask route to handle POST requests for system information
 @app.route('/getSystemInfo', methods=['POST'])
@@ -30,7 +30,7 @@ def get_system_info():
         solarPanelCapacity = int(data.get('solarPanelCapacity'))
         if address or annual_energy_use is not None:  # Check if address or annual energy use is provided
             pvw_result = process_system_info(address, annual_energy_use, solarPanelCapacity)  # Process the information
-            print(pvw_result)  
+            print(pvw_result["ac_monthly"])  
             return jsonify(pvw_result)  # Return the results as JSON
 
 
@@ -90,7 +90,7 @@ def process_system_info(address, annual_energy_use, solarPanelCapacity):
         ac_monthly = data_min['outputs']['ac_monthly']
         # Calculate additional system details
         #pv_system = get_pv_system(annual_energy_use)  # Calculate PV system size
-        #num_batteries = get_num_batteries(pv_system)  # Calculate number of batteries needed
+        #battery_capacity = get_battery_capacity(pv_system)  # Calculate number of batteries needed
         num_panels_min = math.ceil(annual_energy_use/ac_annual_min)
         num_panels_max = math.ceil(annual_energy_use/ac_annual_max)
         pv_system_cost_min = ppr * 1000 * cost_perW * num_panels_min
@@ -102,16 +102,22 @@ def process_system_info(address, annual_energy_use, solarPanelCapacity):
             "ac_annual": ac_annual_min,
             "panel_cost": cost_perW * ppr * 1000,
             #"solrad_monthly": solrad_monthly,
-            #"capacity_factor": capacity_factor,
+            "capacity_factor": capacity_factor,
             #"pv_system": pv_system,
-            "num_panels": (num_panels_min, num_panels_max),
-            #"num_batteries": num_batteries,
-            "pv_system_cost": (pv_system_cost_min, pv_system_cost_max)
+            "num_panels": [num_panels_min, num_panels_max],
+            #"battery_capacity": battery_capacity,
+            "pv_system_cost": (pv_system_cost_min, pv_system_cost_max),
+            #"solrad_annual": solrad_annual,
+            "battery_capacity": math.ceil(annual_energy_use/365),
+            "battery_cost" : math.ceil(annual_energy_use/365) * batt_cost_perkW,
+            "pv_cost": cost_perW * ppr * 1000,
+            "ac_monthly" : ac_monthly,
+            "annualEnergyUse" : annual_energy_use
         }
         # Print estimated results
-        print(f"Estimated Cost for Solar Panels: {results['pv_system_cost']}")
-        print(f"Num Pannels: {results["num_panels"]}")
-       
+        #print(f"Estimated Cost for Solar Panels: {results['pv_system_cost']}")
+        #print(f"Num Pannels: {results["num_panels"]}")
+        print(results['ac_monthly'][0])
 
 
    
@@ -134,14 +140,14 @@ def get_pv_system(annual_energy_use):
 
 
 # Function to calculate the number of batteries needed
-def get_num_batteries(pv_system):
+def get_battery_capacity(pv_system):
     return round(((pv_system * 3) / 4.8), 0)
 
 
 # Function to calculate the total cost of the PV system
-def get_pv_cost(pv_system, num_panels, num_batteries):
+def get_pv_cost(pv_system, num_panels, battery_capacity):
     panel_cost = (num_panels * 1.8 * 108) + (3270 * pv_system)  # Calculate cost of panels
-    battery_cost = 535 * num_batteries  # Calculate cost of batteries
+    battery_cost = 535 * battery_capacity  # Calculate cost of batteries
     return (0.7 * (panel_cost + battery_cost))  # Return total cost with a 30% reduction
 
 if __name__ == '__main__':

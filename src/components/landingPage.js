@@ -93,25 +93,55 @@ const Button = styled.button`
 export const LandingPage = () => {
  const [address, setAddress] = useState("");
  const [annualEnergyUse, setAnnualEnergyUse] = useState('');
+ const [solarPanelCapacity, setSolarPanelCapacity] = useState(370); // New state for solar panel capacity
  const navigate = useNavigate()
 
  // Handle form submission (currently a placeholder for functionality)
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   //console.log('Form Submitted', { address, annualEnergyUse });
-   try{
-     await axios.post('http://127.0.0.1:5000/getSystemInfo', { address, annualEnergyUse })
-       .then((response) => {
-          //console.log("Response is ", response.data)
-          navigate('/solarProduction', {state: {response : response.data, annualEnergyUse : annualEnergyUse}})
-       })
-   }
-   catch(error){
-      console.log('Error: ', error)
-   }
+ const getCosts = async (aress, energy, capacity) => {
+  try {
+    const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        address: aress,
+        annualEnergyUse: energy,
+        solarPanelCapacity: capacity // Include solar panel capacity in the request
+      })
+    });
+
+    const result = await response.json();
+    console.log("Result from Python:", result);
+
+    // Navigate to OutputPage with result as state
+    navigate('/solarProduction', { state: { PVWResult_JSON: result } });
+
+  } catch (error) {
+    console.error("Error calling Python function:", error);
+  }
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log('Form Submitted', { address, annualEnergyUse, solarPanelCapacity });
+  getCosts(address, annualEnergyUse, solarPanelCapacity);
+};
+//  const handleSubmit = async (e) => {
+//    e.preventDefault();
+//    //console.log('Form Submitted', { address, annualEnergyUse });
+//    try{
+//      await axios.post('http://127.0.0.1:5000/getSystemInfo', { address, annualEnergyUse, solarPanelCapacity })
+//        .then((response) => {
+//           //console.log("Response is ", response.data)
+//           navigate('/solarProduction', {state: {response : response.data, annualEnergyUse : annualEnergyUse}})
+//        })
+//    }
+//    catch(error){
+//       console.log('Error: ', error)
+//    }
    
    
- };
 
  return (
    <Container>

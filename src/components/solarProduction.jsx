@@ -25,28 +25,33 @@ const SolarProduction = () => {
     const [barData, setBarData] = useState({});
     const [barOptions, setBarOptions] = useState({});
 
-    const location = useLocation();
-    const PVWResult_JSON = location.state.response;
-    const monthlyEnergyUse = location.state.annualEnergyUse / 12;
-    const ac_annual = PVWResult_JSON?.ac_annual || '';
-    const capacity_factor = PVWResult_JSON?.capacity_factor || '';
-    const num_batteries = PVWResult_JSON?.num_batteries || '';
-    const num_panels = (PVWResult_JSON?.num_panels * (consumption / 100)).toFixed(0) || '';
-    const pv_system = PVWResult_JSON?.pv_system || '';
-    const pv_cost = (PVWResult_JSON?.pv_cost * (consumption / 100)).toFixed(2) || '';
-    const solrad_annual = PVWResult_JSON?.solrad_annual || '';
-    const ac_monthly = PVWResult_JSON?.monthly_ac
+  const location = useLocation();
+  const { PVWResult_JSON } = location.state || {};
+
+  const ac_annual = PVWResult_JSON?.ac_annual || '';
+  const capacity_factor = PVWResult_JSON?.capacity_factor || '';
+  const og_battery_capacity = PVWResult_JSON?.battery_capacity || '';
+  const num_panels = Math.ceil(consumption/100 * Math.ceil((PVWResult_JSON?.num_panels[0] + PVWResult_JSON?.num_panels[1])/2)) || '';
+  const panel_cost = Math.round(PVWResult_JSON?.panel_cost) || ''
+  const pv_system_cost = panel_cost * num_panels || '';
+  const og_battery_cost = PVWResult_JSON?.battery_cost || '';
+  const monthlyEnergyUse = PVWResult_JSON?.annualEnergyUse / 12;
+  const ac_monthly = PVWResult_JSON?.ac_monthly || 'dsfndfidsnfndsfjndsjvn';
+  
+  const [battery_capacity, setBatteryCapacity] = useState(0);
+  const [battery_cost, setBatteryCost] = useState(0);
+
 
 
     useEffect(() => {
 
-
+        
         const costData = {
             labels: ['Panels', 'Batteries', 'Inverters'],
             datasets: [
                 {
                     label: 'Cost',
-                    data: [pv_cost, 0, 0], //need to change to include batteries and inverters if selected
+                    data: [pv_system_cost, battery_cost, 0], //need to change to include batteries and inverters if selected
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -71,21 +76,21 @@ const SolarProduction = () => {
                 }
             }
         };
-
-
+        
+        //const monthlyProdData = [ac_monthly]
         const monthlyProdData = [
-            ac_monthly[0].toFixed(2),
-            ac_monthly[1].toFixed(2),
-            ac_monthly[2].toFixed(2),
-            ac_monthly[3].toFixed(2),
-            ac_monthly[4].toFixed(2),
-            ac_monthly[5].toFixed(2),
-            ac_monthly[6].toFixed(2),
-            ac_monthly[7].toFixed(2),
-            ac_monthly[8].toFixed(2),
-            ac_monthly[9].toFixed(2),
-            ac_monthly[10].toFixed(2),
-            ac_monthly[11].toFixed(2)
+            ac_monthly[0].toFixed(2) * num_panels,
+            ac_monthly[1].toFixed(2) * num_panels,
+            ac_monthly[2].toFixed(2) * num_panels,
+            ac_monthly[3].toFixed(2) * num_panels,
+            ac_monthly[4].toFixed(2) * num_panels,
+            ac_monthly[5].toFixed(2) * num_panels,
+            ac_monthly[6].toFixed(2) * num_panels,
+            ac_monthly[7].toFixed(2) * num_panels,
+            ac_monthly[8].toFixed(2) * num_panels,
+            ac_monthly[9].toFixed(2) * num_panels,
+            ac_monthly[10].toFixed(2) * num_panels,
+            ac_monthly[11].toFixed(2) * num_panels
         ];
 
         const prodData = {
@@ -196,11 +201,11 @@ const SolarProduction = () => {
                             <div className="flex flex-wrap gap-3">
                                 <div className="font-bold">Solar Energy System</div>
                                 <div className="flex align-items-center mt-3 ml-1">
-                                    <RadioButton inputId="option1" value="neither" onChange={(e) => setComponents(e.value)} checked={components === 'neither'} />
+                                    <RadioButton inputId="option1" value="neither" onChange={(e) => {setComponents(e.value);setBatteryCapacity(0);setBatteryCost(0)}} checked={components === 'neither'} />
                                     <label htmlFor="option1" className="ml-2">Only Panels</label>
                                 </div>
                                 <div className="flex align-items-center ml-1">
-                                    <RadioButton inputId="option2" disabled value="batteries" onChange={(e) => setComponents(e.value)} checked={components === 'batteries'} />
+                                    <RadioButton inputId="option2" value="batteries" onChange={(e) => {setComponents(e.value);setBatteryCapacity(og_battery_capacity);setBatteryCost(og_battery_cost)}} checked={components === 'batteries'} />
                                     <label htmlFor="option2" className="ml-2">Panels & Batteries</label>
                                 </div>
                                 <div className="flex align-items-center ml-1">
@@ -233,9 +238,9 @@ const SolarProduction = () => {
                                 <img src={battery} className="text-2xl text-white" />
                             </div>
                             <div className="pl-6">
-                                <span className="text-sm text-gray-500 font-light">Batteries</span>
+                                <span className="text-sm text-gray-500 font-light">Battery Capacity</span>
                                 <div className="flex items-center">
-                                    <strong className="text-2xl text-gray-700 font-semibold">TBD</strong>
+                                    <strong className="text-2xl text-gray-700 font-semibold">{battery_capacity} kWh</strong>
                                 </div>
                             </div>
                         </div>
@@ -256,7 +261,7 @@ const SolarProduction = () => {
                         <div className="w-1/3 m-4">
                             <div className="h-80 border border-slate-200 m-auto position-relative flex flex-col">
                                 <div className="mt-4 ml-4 font-light text-xl text-gray-500">Total Investment</div>
-                                <div className="mt-2 text-4xl text-gray-700 font-semibold text-center">${pv_cost}</div>
+                                <div className="mt-2 text-4xl text-gray-700 font-semibold text-center">${pv_system_cost+battery_cost}</div>
                                 <div className="mt-4 overflow-auto">
                                     <PrimeChart type="pie" data={pieData} options={pieOptions} className="md:w-30rem ml-12" />
                                 </div>
@@ -280,7 +285,7 @@ const SolarProduction = () => {
                         <div className="w-2/3 m-4">
                             <div className=" h-2/3 m-auto border border-slate-200 position-relative">
                                 <div className="m-4 text-xl text-gray-500 font-light text-center">Estimated Monthly Solar Production</div>
-                                <div className="w-5/6 m-auto">
+                                <div className="w-6/6 m-auto">
                                     <PrimeChart type="bar" data={barData} options={barOptions} width={600} height={250} className="md:w-30rem ml-8 mr-8" />
                                 </div>
 
