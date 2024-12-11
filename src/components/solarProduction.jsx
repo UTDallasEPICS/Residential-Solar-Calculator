@@ -6,6 +6,7 @@ import Chart, { layouts } from 'chart.js/auto'
 import { Chart as PrimeChart } from 'primereact/chart';
 import { React, useState, useEffect } from 'react'
 import { Card } from 'primereact/card';
+import { InputNumber } from 'primereact/inputnumber';
 import panel from '../assets/panel.png';
 import inverter from '../assets/inverter.png'
 import battery from '../assets/battery.png'
@@ -18,7 +19,7 @@ const SolarProduction = () => {
     Chart.register(annotationPlugin);
 
     const [consumption, setConsumption] = useState(100); //default value is 100%
-    const [components, setComponents] = useState("neither"); //default value is only panels included
+    const [components, setComponents] = useState("solar"); //default value is solar only
 
     const [pieData, setPieData] = useState({});
     const [pieOptions, setPieOptions] = useState({});
@@ -171,42 +172,55 @@ const SolarProduction = () => {
 
     return (
         <PrimeReactProvider value={{ unstyled: true }}>
-            <section id="layout" className="flex mb-4  h-screen bg-white">
-                <div className="w-1/6 flex flex-col items-center gap-4 h-screen bg-slate-200">
-                    <div className="text-bold text-xl text-center text-black mt-8">Advanced Settings</div>
-                    <Card>
-                        <div className="bg-white border border-slate-300 h-1/2 w-5/6 text-slate-400 ml-4">
-                            <div className="flex items-center justify-center p-2">
+            <section id="layout" className="flex h-screen bg-white">
+                <div className="w-1/4 p-6 bg-gradient-to-b from-gray-100 to-gray-200 shadow-xl rounded-l-lg h-screen overflow-hidden">
+                    <div className="text-center mb-8">
+                        <h2 className="text-2xl font-semibold text-gray-800">Advanced Settings</h2>
+                    </div>
+
+                    <Card className="p-6 bg-white rounded-lg shadow-md mb-6">
+                        <div className="flex flex-col items-center text-center space-y-4">
+                            <div className="text-sm text-gray-500 font-semibold">Coverage By Solar</div>
+                            <div className="flex flex-col items-center space-y-2">
                                 <Knob
                                     ptOptions={{ mergeSections: false }}
                                     pt={{
                                         range: 'stroke-current transition duration-100 ease-in stroke-gray-200 dark:stroke-gray-700 fill-none',
-                                        value: 'animate-dash-frame  stroke-blue-500 fill-none',
+                                        value: 'animate-dash-frame stroke-blue-500 fill-none',
                                         label: 'text-center text-xl'
                                     }}
                                     min={0}
                                     max={100}
                                     value={consumption}
                                     onChange={(e) => setConsumption(e.value)}
+                                    strokeWidth={6}
+                                    style={{ width: '80px', height: '80px', marginRight: '15px' }}
                                 />
-                            </div>
-                            <div className="justify-center items-center text-center font-bold">
-                                Percentage Covered By Solar
+                                <InputNumber
+                                    value={consumption}
+                                    onValueChange={(e) => setConsumption(e.value)}
+                                    min={0}
+                                    max={100}
+                                    suffix="%"
+                                    size="5"
+                                    inputClassName="text-center w-16 text-black mt-2 ml-3"
+                                />
                             </div>
                         </div>
                     </Card>
 
-                    <Card>
-                        <div className="bg-white border border-slate-300 h-1/2 w-5/6 p-4 text-slate-400 mb-4 ml-4">
-                            <div className="flex flex-wrap gap-3">
-                                <div className="font-bold">Solar Energy System</div>
-                                <div className="flex align-items-center mt-3 ml-1">
-                                    <RadioButton inputId="option1" value="neither" onChange={(e) => {setComponents(e.value);setBatteryCapacity(0);setBatteryCost(0)}} checked={components === 'neither'} />
-                                    <label htmlFor="option1" className="ml-2">Only Panels</label>
+                    <Card className="p-4 bg-white rounded-lg shadow-md">
+                        <div className="flex flex-col gap-4">
+                            <div className="text-sm text-gray-500 font-semibold">Solar Energy System</div>
+
+                            <div className="flex flex-col gap-3">
+                                <div className="flex items-center">
+                                    <RadioButton inputId="option1" value="solar" onChange={(e) => {setComponents(e.value);setBatteryCapacity(0);setBatteryCost(0)}} checked={components === 'solar'} />
+                                    <label htmlFor="option1" className="ml-2 text-gray-700">Solar Only</label>
                                 </div>
-                                <div className="flex align-items-center ml-1">
-                                    <RadioButton inputId="option2" value="batteries" onChange={(e) => {setComponents(e.value);setBatteryCapacity(og_battery_capacity);setBatteryCost(og_battery_cost)}} checked={components === 'batteries'} />
-                                    <label htmlFor="option2" className="ml-2">Panels & Batteries</label>
+                                <div className="flex items-center">
+                                    <RadioButton inputId="option2" disabled value="batteries" onChange={(e) => setComponents(e.value)} checked={components === 'batteries'} />
+                                    <label htmlFor="option2" className="ml-2 text-gray-700">Panels & Batteries</label>
                                 </div>
                                 <div className="flex align-items-center ml-1">
                                     <RadioButton inputId="option3" disabled value="inverters" onChange={(e) => setComponents(e.value)} checked={components === 'inverters'} />
@@ -282,17 +296,15 @@ const SolarProduction = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-2/3 m-4">
-                            <div className=" h-2/3 m-auto border border-slate-200 position-relative">
-                                <div className="m-4 text-xl text-gray-500 font-light text-center">Estimated Monthly Solar Production</div>
-                                <div className="w-6/6 m-auto">
-                                    <PrimeChart type="bar" data={barData} options={barOptions} width={600} height={250} className="md:w-30rem ml-8 mr-8" />
-                                </div>
 
+                        <div className="w-full sm:w-2/3 p-4">
+                            <div className="h-[500px] border border-slate-200 flex flex-col p-4">
+                                <div className="text-xl text-gray-500 font-light text-center">Estimated Monthly Solar Production</div>
+                                <div className="w-full h-full mt-4">
+                                    <PrimeChart type="bar" data={barData} options={barOptions} className="w-full h-full" />
+                                </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </section >
