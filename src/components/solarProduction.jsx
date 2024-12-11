@@ -219,7 +219,7 @@ const SolarProduction = () => {
                                     <label htmlFor="option1" className="ml-2 text-gray-700">Solar Only</label>
                                 </div>
                                 <div className="flex items-center">
-                                    <RadioButton inputId="option2" disabled value="batteries" onChange={(e) => setComponents(e.value)} checked={components === 'batteries'} />
+                                    <RadioButton inputId="option2" value="batteries" onChange={(e) => {setComponents(e.value);setBatteryCapacity(og_battery_capacity);setBatteryCost(og_battery_cost)}} checked={components === 'batteries'} />
                                     <label htmlFor="option2" className="ml-2 text-gray-700">Panels & Batteries</label>
                                 </div>
                                 <div className="flex align-items-center ml-1">
