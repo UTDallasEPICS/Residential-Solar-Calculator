@@ -32,6 +32,12 @@ function App() {
             <h1 className="header-title">THE UNIVERSITY OF TEXAS AT DALLAS</h1>
             <h2 className="header-subtitle">Facilities & Economic Development</h2>
             <h3 className="header-department">Sustainability</h3>
+            <nav id="header_menu" className={menuOpen ? 'default' : 'hidden'}>
+              <ul className='nav'>
+                <li><Link to="/" className='nav-item'>Home</Link></li>
+                <li><Link to="/faq" className='nav-item'>FAQ</Link></li>
+              </ul>
+            </nav>
           </div>
 
           {/* Menu Toggle Button */}
@@ -45,13 +51,7 @@ function App() {
         </div>
 
         {/* Navigation Menu */}
-        <nav id="header_menu" className={menuOpen ? 'default' : 'hidden'}>
-          <ul className='nav'>
-            <li><Link to="/" className='nav-item'>Home</Link></li>
-            <li><Link to="/About" className='nav-item'>About Us</Link></li>
-             <li><Link to="/faq" className='nav-item'>FAQ</Link></li>
-          </ul>
-        </nav>
+        
       </header>
 
       {/* Main Content Area */}

@@ -249,6 +249,10 @@ mark {
     cursor: pointer;
   }
 
+  #search{
+    color: black;
+  }
+
 @media (max-width: 768px) {
     .faq-section {
         width: 90%; /* Adjusted for smaller screens */

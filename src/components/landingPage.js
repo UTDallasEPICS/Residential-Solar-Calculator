@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import background from '../assets/solarPanel.jpg';
 import './Styles.css';
 import axios from 'axios'

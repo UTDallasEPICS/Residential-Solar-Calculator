@@ -65,6 +65,10 @@ body {
   height: auto;
 }
 
+#header_menu{
+  text-align: center;
+}
+
 /* Navigation Menu */
 .nav {
   list-style: none;
