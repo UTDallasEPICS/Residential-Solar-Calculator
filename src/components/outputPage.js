@@ -61,96 +61,76 @@ const InfoContent = styled.p`
   text-align: center;
 `;
 
-
-
 const OutputPage = () => {
-  const location = useLocation();
-  const { PVWResult_JSON } = location.state || {};
+ const location = useLocation();
+ const PVWResult_JSON = location.state;
+ 
+ const ac_annual = PVWResult_JSON?.ac_annual || '';
+ const capacity_factor = PVWResult_JSON?.capacity_factor || '';
+ const num_batteries = PVWResult_JSON?.num_batteries || '';
+ const num_panels = PVWResult_JSON?.num_panels || '';
+ const pv_system = PVWResult_JSON?.pv_system || '';
+ const pv_cost = PVWResult_JSON?.pv_cost || '';
+ const solrad_annual = PVWResult_JSON?.solrad_annual || '';
+ const monthly_ac = PVWResult_JSON?.ac_monthly || '';
 
-  const ac_annual = PVWResult_JSON?.ac_annual || '';
-  const capacity_factor = PVWResult_JSON?.capacity_factor || '';
-  const num_batteries = PVWResult_JSON?.num_batteries || '';
-  const num_panels = PVWResult_JSON?.num_panels || '';
-  const pv_system = PVWResult_JSON?.pv_system || '';
-  const panel_cost = PVWResult_JSON?.panel_cost || ''
-  const pv_system_cost = PVWResult_JSON?.pv_system_cost || '';
-  const solrad_annual = PVWResult_JSON?.solrad_annual || '';
-
-  function updateSliderValue(slider) {
-    const value = slider.value;
-    document.getElementById('sliderValue').textContent = value;
-    slider.style.setProperty('--value', value);
-  }
-  
-  const [value, setValue] = useState(100); // Initial slider value
-  
-  const handleSliderChange = (e) => {
-    setValue(e.target.value);
-  };
-
-  return (
-    
-    <PageContainer>
-      <Section>
-        <Title>Solar Sizing Summary</Title>
-        <Text>
-          This section will display the calculated size of the solar panel system required
-          based on the annual energy usage input. It may include details like total kW needed and estimated
-          costs.
-        </Text>
-        {/* <InfoBox>
-          <InfoTitle>AC Annual</InfoTitle>
-          <InfoContent>{ac_annual} kWh</InfoContent>
-        </InfoBox>
-        <InfoBox>
-          <InfoTitle>Capacity Factor</InfoTitle>
-          <InfoContent>{capacity_factor}</InfoContent>
-        </InfoBox> */}
-        <InfoBox>
-          <InfoTitle>Number of Panels Required</InfoTitle>
-          <InfoContent>{Math.ceil((value/100) * num_panels[0])} - {Math.ceil((value/100) * num_panels[1])} panels</InfoContent>
-        </InfoBox>
-        {/* <InfoBox>
-          <InfoTitle>Daily Energy Output (kW)</InfoTitle>
-          <InfoContent>{pv_system} kW</InfoContent>
-        </InfoBox> */}
-        {/* <InfoBox>
-          <InfoTitle>Solar Radiation Annually</InfoTitle>
-          <InfoContent>{solrad_annual} kWh / m² / day</InfoContent>
-        </InfoBox> */}
-      </Section>
-      {/* <Section>
-        <Title>Battery Sizing</Title>
-        <Text>
-          Here, the required battery size to support the solar system will be shown. This
-          could include battery capacity in kWh and number of batteries recommended.
-        </Text>
-        <InfoBox>
-          <InfoTitle>Battery Capacity</InfoTitle>
-          <InfoContent>{capacity_factor} kWh</InfoContent>
-        </InfoBox>
-        <InfoBox>
-          <InfoTitle>Number of Batteries</InfoTitle>
-          <InfoContent>{num_batteries} batteries</InfoContent>
-        </InfoBox>
-      </Section> */}
-      <Section>
-        <Title>Total Cost</Title>
-        <Text>
-          Here, the optimal battery and solar panel sizes are taken into account to calculate the total cost of the system.
-        </Text>
-        <InfoBox>
-          <InfoTitle>Total Cost</InfoTitle>
-          <InfoContent>${Math.round((Math.ceil((value/100) * num_panels[0]) * panel_cost),2)} - ${Math.round((Math.ceil((value/100) * num_panels[1]) * panel_cost),2)}</InfoContent>
-        </InfoBox>
-        
-      </Section>
-      <div className="slider-container">
-          <div className="slider-value">{value}% Coverage</div>
-          <input type="range" min="1" max="100" value={value} className="slider" style={{ "--value": value }} onChange={handleSliderChange}/>
-        </div>
-    </PageContainer>
-  );
+ return (
+   <PageContainer>
+     <Section>
+       <Title>Solar Sizing Summary</Title>
+       <Text>
+         This section will display the calculated size of the solar panel system required
+         based on the annual energy usage input. It may include details like total kW needed and estimated
+         costs.
+       </Text>
+       <InfoBox>
+         <InfoTitle>Annual Solar Production</InfoTitle>
+         <InfoContent>{ac_annual.toFixed(2)} kWh</InfoContent>
+       </InfoBox>
+       <InfoBox>
+         <InfoTitle>Capacity Factor</InfoTitle>
+         <InfoContent>{capacity_factor.toFixed(2)}</InfoContent>
+       </InfoBox>
+       <InfoBox>
+         <InfoTitle>Number of Panels Required</InfoTitle>
+         <InfoContent>{num_panels} panels</InfoContent>
+       </InfoBox>
+       <InfoBox>
+         <InfoTitle>Daily Energy Output (kW)</InfoTitle>
+         <InfoContent>{pv_system.toFixed(2)} kW</InfoContent>
+       </InfoBox>
+       <InfoBox>
+         <InfoTitle>Solar Radiation Annually</InfoTitle>
+         <InfoContent>{solrad_annual.toFixed(2)} kWh / m² / day</InfoContent>
+       </InfoBox>
+     </Section>
+     <Section>
+       <Title>Battery Sizing</Title>
+       <Text>
+         Here, the required battery size to support the solar system will be shown. This
+         could include battery capacity in kWh and number of batteries recommended.
+       </Text>
+       <InfoBox>
+         <InfoTitle>Battery Capacity</InfoTitle>
+         <InfoContent>{capacity_factor.toFixed(2)} kWh</InfoContent>
+       </InfoBox>
+       <InfoBox>
+         <InfoTitle>Number of Batteries</InfoTitle>
+         <InfoContent>{num_batteries} batteries</InfoContent>
+       </InfoBox>
+     </Section>
+     <Section>
+       <Title>Total Cost</Title>
+       <Text>
+         Here, the optimal battery and solar panel sizes are taken into account to calculate the total cost of the system.
+       </Text>
+       <InfoBox>
+         <InfoTitle>Total Cost</InfoTitle>
+         <InfoContent>${pv_cost.toFixed(2)}</InfoContent>
+       </InfoBox>
+     </Section>
+   </PageContainer>
+ );
 };
 
 export default OutputPage;

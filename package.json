@@ -10,12 +10,19 @@
     "@testing-library/user-event": "^13.5.0",
     "@trimblemaps/trimblemaps-js": "^3.19.0",
     "axios": "^1.6.8",
+    "chart.js": "^4.4.6",
+    "chartjs-plugin-annotation": "^3.1.0",
     "flask": "^0.2.10",
+    "location": "^0.0.1",
+    "prettier": "^3.3.3",
+    "primereact": "^10.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
+    "recharts": "^2.13.0",
     "styled-components": "^6.1.10",
+    "tailwindcss": "^3.4.15",
     "use-places-autocomplete": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -23,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./public/styles.css --watch",
+    "prettier": "npx prettier --write **/*.html"
   },
   "browserslist": {
     "production": [
@@ -39,7 +48,21 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "eslint-plugin-flowtype": "^8.0.3"
+    "eslint-plugin-flowtype": "^8.0.3",
+    "postcss": "^8.4.47",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1"
   },
-  "packageManager": "yarn@4.5.0+sha512.837566d24eec14ec0f5f1411adb544e892b3454255e61fdef8fd05f3429480102806bac7446bc9daff3896b01ae4b62d00096c7e989f1596f2af10b927532f39"
+  "description": "### `flask run`",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UTDallasEPICS/Residential-Solar-Calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UTDallasEPICS/Residential-Solar-Calculator/issues"
+  }
 }

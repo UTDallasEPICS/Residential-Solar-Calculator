@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import background from '../assets/solarPanel.jpg';
 import './Styles.css';
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 // Styled components for layout and styling
 const Container = styled.div`
@@ -88,51 +90,69 @@ const Button = styled.button`
   }
 `;
 
-const LandingPage = () => {
-  const [address, setAddress] = useState("");
-  const [annualEnergyUse, setAnnualEnergyUse] = useState("");
-  const [solarPanelCapacity, setSolarPanelCapacity] = useState(370); // New state for solar panel capacity
-  const navigate = useNavigate();
 
-  // Modified getCosts function to navigate after fetching data
-  const getCosts = async (aress, energy, capacity) => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ 
-          address: aress,
-          annualEnergyUse: energy,
-          solarPanelCapacity: capacity // Include solar panel capacity in the request
-        })
-      });
+export const LandingPage = () => {
+ const [address, setAddress] = useState("");
+ const [annualEnergyUse, setAnnualEnergyUse] = useState('');
+ const [annualEnergyCost, setAnnualEnergyCost] = useState('');
+ const [solarPanelCapacity, setSolarPanelCapacity] = useState(370); // New state for solar panel capacity
+ const navigate = useNavigate()
 
-      const result = await response.json();
-      console.log("Result from Python:", result);
+ // Handle form submission (currently a placeholder for functionality)
+ const getCosts = async (aress, energy, annualCost, capacity) => {
+  try {
+    const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        address: aress,
+        annualEnergyUse: energy,
+        annualEnergyCost: annualCost,
+        solarPanelCapacity: capacity // Include solar panel capacity in the request
+      })
+    });
 
-      // Navigate to OutputPage with result as state
-      navigate('/outputPage', { state: { PVWResult_JSON: result } });
+    const result = await response.json();
+    console.log("Result from Python:", result);
 
-    } catch (error) {
-      console.error("Error calling Python function:", error);
-    }
-  };
+    // Navigate to OutputPage with result as state
+    navigate('/solarProduction', { state: { PVWResult_JSON: result } });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Submitted', { address, annualEnergyUse, solarPanelCapacity });
-    getCosts(address, annualEnergyUse, solarPanelCapacity);
-  };
+  } catch (error) {
+    console.error("Error calling Python function:", error);
+  }
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log('Form Submitted', { address, annualEnergyUse, annualEnergyCost, solarPanelCapacity });
+  getCosts(address, annualEnergyUse, annualEnergyCost, solarPanelCapacity);
+};
+//  const handleSubmit = async (e) => {
+//    e.preventDefault();
+//    //console.log('Form Submitted', { address, annualEnergyUse });
+//    try{
+//      await axios.post('http://127.0.0.1:5000/getSystemInfo', { address, annualEnergyUse, solarPanelCapacity })
+//        .then((response) => {
+//           //console.log("Response is ", response.data)
+//           navigate('/solarProduction', {state: {response : response.data, annualEnergyUse : annualEnergyUse}})
+//        })
+//    }
+//    catch(error){
+//       console.log('Error: ', error)
+//    }
+   
+   
 
   return (
     <Container>
       <Card>
         <Title>Residential Solar Calculator</Title>
 
-        {/* Form Section */}
-        <Form onSubmit={handleSubmit}>
+       {/* Form Section */}
+       <Form onSubmit={handleSubmit}>
           <Label>
             Enter your address:
             <Input
@@ -152,6 +172,15 @@ const LandingPage = () => {
             />
           </Label>
           <Label>
+            Enter your total annual electricity cost:
+            <Input
+              type="number"
+              placeholder="Enter annual electricity cost"
+              value={annualEnergyCost}
+              onChange={(e) => setAnnualEnergyCost(e.target.value)}
+            />
+          </Label>
+          <Label>
             Enter the wattage of the solar panel (in W):
             <Input
               type="number"
@@ -162,9 +191,9 @@ const LandingPage = () => {
           </Label>
           <Button type="submit">Submit</Button>
         </Form>
-      </Card>
-    </Container>
-  );
-};
+     </Card>
+   </Container>
+ );
+}
 
 export default LandingPage;
