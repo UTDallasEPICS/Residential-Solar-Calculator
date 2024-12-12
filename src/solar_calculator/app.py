@@ -31,14 +31,12 @@ def get_system_info():
         solarPanelCapacity = int(data.get('solarPanelCapacity'))
         if address or annual_energy_use is not None:  # Check if address or annual energy use is provided
             pvw_result = process_system_info(address, annual_energy_use, annualEnergyCost, solarPanelCapacity)  # Process the information
-            print(pvw_result["ac_monthly"])  
             return jsonify(pvw_result)  # Return the results as JSON
 
 
 # Read the API key from a text file
 api_file = open("api-keys.txt", "r")
 line = api_file.readlines()[0]
-print(line)
 api_key = line.split(',')[1]  # Extract API key from the file
 
 
@@ -144,6 +142,5 @@ def get_pv_cost(pv_system, num_panels, battery_capacity):
 
 if __name__ == '__main__':
     app.run(debug=True)
-#print(process_system_info("453 Booth Street, Ottawa ON",10000)["pv_cost"])
-#get_system_info("1600 Pennsylvania Ave, Dallas, TX 75201",12000)
+
 	

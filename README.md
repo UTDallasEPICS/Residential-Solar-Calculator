@@ -10,6 +10,9 @@ After the severe storms like the February 2021 Texas winter storm, many Texas re
 - Provide the estimated total investment cost
 - Educate users on solar energy and its benefits
 
+## Third Party Integrations
+- PVWatts: Third party API to calculate solar production
+
 ## Stack
 
 ### Frontend
