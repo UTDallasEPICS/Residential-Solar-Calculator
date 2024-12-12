@@ -1,2 +1,1 @@
-pypvwatts,XYKoz1NiaJxYv359aCbwbtKkS7cgrwS4FOx2SrxH
-maps,hidden
+pypvwatts,5cfaHYaMmcrwrpWaI6b3940c9vhzgiTYVG3fB4Sg

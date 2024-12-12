@@ -36,11 +36,11 @@ def get_system_info():
 
 
 # Read the API key from a text file
-#api_file = open("api-keys.txt", "r")
-#line = api_file.readlines()[0]
-#print(line)
-#api_key = line.split(',')[1]  # Extract API key from the file
-api_key = '5cfaHYaMmcrwrpWaI6b3940c9vhzgiTYVG3fB4Sg'
+api_file = open("api-keys.txt", "r")
+line = api_file.readlines()[0]
+print(line)
+api_key = line.split(',')[1]  # Extract API key from the file
+
 
 
 
@@ -60,7 +60,7 @@ def process_system_info(address, annual_energy_use, annualEnergyCost, solarPanel
 
     loc = location(address)  # Get location details (latitude and longitude) from the 'location' module
     params_min = {
-        "api_key": '5cfaHYaMmcrwrpWaI6b3940c9vhzgiTYVG3fB4Sg',  # API key for the request
+        "api_key": api_key,  # API key for the request
         "azimuth": 180,  # Azimuth angle for solar panels (0 for true north, 90 for east, 180 for south, and 270 for west)
         "lat": loc.latitude,  # Latitude of the location
         "lon": loc.longitude,  # Longitude of the location
@@ -86,12 +86,9 @@ def process_system_info(address, annual_energy_use, annualEnergyCost, solarPanel
     if 'outputs' in data_min and 'ac_annual' in data_min['outputs']:
         ac_annual_min = data_min['outputs']['ac_annual']  # Annual AC energy output in kWh  
         ac_annual_max = data_max['outputs']['ac_annual']
-        solrad_monthly = data_min['outputs']['solrad_monthly']  # Annual solar radiation
         capacity_factor = data_min['outputs']['capacity_factor']  # Capacity factor
         ac_monthly = data_min['outputs']['ac_monthly']
         # Calculate additional system details
-        #pv_system = get_pv_system(annual_energy_use)  # Calculate PV system size
-        #battery_capacity = get_battery_capacity(pv_system)  # Calculate number of batteries needed
         num_panels_min = math.ceil(annual_energy_use/ac_annual_min)
         num_panels_max = math.ceil(annual_energy_use/ac_annual_max)
         pv_system_cost_min = ppr * 1000 * cost_perW * num_panels_min
@@ -102,13 +99,9 @@ def process_system_info(address, annual_energy_use, annualEnergyCost, solarPanel
             "ac_monthly" : ac_monthly,
             "ac_annual": ac_annual_min,
             "panel_cost": cost_perW * ppr * 1000,
-            #"solrad_monthly": solrad_monthly,
             "capacity_factor": capacity_factor,
-            #"pv_system": pv_system,
             "num_panels": [num_panels_min, num_panels_max],
-            #"battery_capacity": battery_capacity,
             "pv_system_cost": (pv_system_cost_min, pv_system_cost_max),
-            #"solrad_annual": solrad_annual,
             "battery_capacity": math.ceil(annual_energy_use/365),
             "battery_cost" : math.ceil(annual_energy_use/365) * batt_cost_perkW,
             "pv_cost": cost_perW * ppr * 1000,
@@ -116,10 +109,7 @@ def process_system_info(address, annual_energy_use, annualEnergyCost, solarPanel
             "annualEnergyUse" : annual_energy_use,
             "annualCost" : annualEnergyCost
         }
-        # Print estimated results
-        #print(f"Estimated Cost for Solar Panels: {results['pv_system_cost']}")
-        #print(f"Num Pannels: {results["num_panels"]}")
-        print(results['ac_monthly'][0])
+        
 
 
    
