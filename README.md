@@ -12,6 +12,7 @@ After the severe storms like the February 2021 Texas winter storm, many Texas re
 
 ## Third Party Integrations
 - PVWatts: Third party API to calculate solar production
+- Geopy: library for getting longitude and latitude based off of address
 
 ## Stack
 
