@@ -254,6 +254,7 @@ const SolarProduction = () => {
                                 <div className="flex items-center">
                                     <strong className="text-2xl text-gray-700 font-semibold">{battery_capacity} kWh</strong>
                                 </div>
+                                <span className="text-sm text-gray-500 font-light">*Capacity to support backup energy for 1 day</span>
                             </div>
                         </div>
                         
