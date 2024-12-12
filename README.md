@@ -1,103 +1,50 @@
 # Residential-Solar-Calculator
-## Before running dynamic elements on the page, ensure that you have the back end component (Flask) loaded.
 
-### `flask run`
+## Conceptual Overview
+After the severe storms like the February 2021 Texas winter storm, many Texas residents are worried about future electricity grid failures. To prevent experiencing another power crisis, many have looked towards transitioning to alternative energy sources. The Residential Solar Calculator application will assist DFW residents in shifting to solar energy by providing estimates on a suitable solar system. The calculator assists users in determining the best solar energy system configuration, estimated investment costs, and educates users on the benefits of solar energy.
 
-## Note: 
-Navigate to the directory that "App.py" is in. 
+## Functional Requirements
+- Provide a breakdown of the solar energy system's configuration based on user need's 
+    - Number of solar panels
+    - Number of batteries
+- Provide the estimated total investment cost
+- Educate users on solar energy and its benefits
 
-### `src/solar_calculator/app.py`
+## Stack
 
-Ensure that you have flask installed.
-### `pip install flask`
+### Frontend
+- React (framework)
+- PrimeReact (UI component library)
+- TailwindCSS (styling)
+- Javascript (language)
 
-In a separate terminal, run the front end component.
+### Backend
+- Node.js (runtime)
+- Flask (framework)
 
-### `npm start`
+## Project Setup
 
-## How to run after cloning the repo to local device
+### First Time Setup
 
-- open a terminal and navigate to the project folder "/residential-solar-calculator"
-- run command "npm install" to acquire necessary packages to run the application
-- run command "npm start" to launch the react application (it should launch in your browser on port 3000)
+Before running the project, make sure the following software are installed:
+- [Node.js](https://nodejs.org/en/download/package-manager)
+- [Flask](https://flask.palletsprojects.com/en/stable/installation/)  
 
-## Figma file link:
-- https://www.figma.com/file/mhuaRkG4vyjVTCW2TTB3Dq/Solar-Residential-Calculator-Wireframe?type=design&node-id=0%3A1&mode=design&t=98TQzRhSnh7Klh0e-1
+After installing the required software, do the following:
 
+1. Open VSCode and click the "Clone Repository" Button on the welcome screen.
+2. In the GitHub repository, click on the green "Code" Button and copy the HTTPS URL.
+3. Enter the HTTPS URL into the input box and choose a location for the local repository.
+4. Once the project is open, click on the terminal window.
+5. Run "npm install" to install the required dependencies.
+6. Traverse to the solar calculator directory by running "cd src/solar_calculator" to get to the python code.
+7. Then run "flask run". This should display a message saying the server successfully started.
+8. Open another terminal window and run "npm start" to start the frontend application.
 
+### Running the Project
 
+After the setting up the first time, you only need to do the following:
 
-## Below is the standard readme content from a default react app, leaving it here just for some basic explaination on raect
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## 'npm install --save @trimblemaps/trimblemaps-js' to install Trimble
-
-## 'pip install geopy' to install geopy
+1. Open a terminal and "cd src/solar_calculator".
+2. Run "flask run".
+3. Open another terminal window and run "npm start".
