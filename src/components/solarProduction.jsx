@@ -52,7 +52,7 @@ const SolarProduction = () => {
     useEffect(() => {
         
         const costData = {
-            labels: ['Panels', 'Batteries', 'Inverters'],
+            labels: ['Panels', 'Batteries'],
             datasets: [
                 {
                     label: 'Cost',
@@ -177,8 +177,8 @@ const SolarProduction = () => {
     
     return (
         <PrimeReactProvider value={{ unstyled: true }}>
-            <section id="layout" className="flex h-screen bg-white">
-                <div className="w-1/4 p-6 bg-gradient-to-b from-gray-100 to-gray-200 shadow-xl rounded-l-lg h-screen overflow-hidden">
+            <section id="layout" className="flex bg-white overflow-auto">
+                <div className="w-1/4 p-6 bg-gradient-to-b from-gray-100 to-gray-200 shadow-xl rounded-l-lg">
                     <div className="text-center mb-8">
                         <h2 className="text-2xl font-semibold text-gray-800">Advanced Settings</h2>
                     </div>
@@ -225,16 +225,9 @@ const SolarProduction = () => {
                                 </div>
                                 <div className="flex items-center">
                                     <RadioButton inputId="option2" value="batteries" onChange={(e) => {setComponents(e.value);setBatteryCapacity(og_battery_capacity);setBatteryCost(og_battery_cost)}} checked={components === 'batteries'} />
-                                    <label htmlFor="option2" className="ml-2 text-gray-700">Panels & Batteries</label>
+                                    <label htmlFor="option2" className="ml-2 text-gray-700">Battery Backup</label>
                                 </div>
-                                <div className="flex align-items-center ml-1">
-                                    <RadioButton inputId="option3" disabled value="inverters" onChange={(e) => setComponents(e.value)} checked={components === 'inverters'} />
-                                    <label htmlFor="option3" className="ml-2">Panels & Inverters</label>
-                                </div>
-                                <div className="flex align-items-center ml-1">
-                                    <RadioButton inputId="option4" disabled value="all" onChange={(e) => setComponents(e.value)} checked={components === 'all'} />
-                                    <label htmlFor="option4" className="ml-2">Panels, Batteries, & Inverters</label>
-                                </div>
+                                
                             </div>
                         </div>
                     </Card>
@@ -263,17 +256,7 @@ const SolarProduction = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-white rounded-sm mr-8 p-2 flex-1 border border-gray-200 flex items-center">
-                            <div className="rounded-full h-20 w-20 flex items-center justify-center">
-                                <img src={inverter} className="text-2xl text-white" />
-                            </div>
-                            <div className="pl-6">
-                                <span className="text-sm text-gray-500 font-light">Inverters</span>
-                                <div className="flex items-center">
-                                    <strong className="text-2xl text-gray-700 font-semibold">TBD</strong>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <div className="flex h-full mt-4 ml-4">
