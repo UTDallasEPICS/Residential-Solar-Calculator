@@ -27,9 +27,10 @@ def get_system_info():
         data = request.json  # Get JSON data from the request
         address = data.get('address')  # Extract 'address' from request data
         annual_energy_use = int(data.get('annualEnergyUse'))  # Extract 'annualEnergyUse' and convert to integer
+        annualEnergyCost = int(data.get('annualEnergyCost'))
         solarPanelCapacity = int(data.get('solarPanelCapacity'))
         if address or annual_energy_use is not None:  # Check if address or annual energy use is provided
-            pvw_result = process_system_info(address, annual_energy_use, solarPanelCapacity)  # Process the information
+            pvw_result = process_system_info(address, annual_energy_use, annualEnergyCost, solarPanelCapacity)  # Process the information
             print(pvw_result["ac_monthly"])  
             return jsonify(pvw_result)  # Return the results as JSON
 
@@ -47,7 +48,7 @@ api_key = '5cfaHYaMmcrwrpWaI6b3940c9vhzgiTYVG3fB4Sg'
 
 
 # Function to process system information using PVWatts API
-def process_system_info(address, annual_energy_use, solarPanelCapacity):  
+def process_system_info(address, annual_energy_use, annualEnergyCost, solarPanelCapacity):  
     if solarPanelCapacity > 0:
             ppr = solarPanelCapacity/1000.0  
     global results
@@ -112,7 +113,8 @@ def process_system_info(address, annual_energy_use, solarPanelCapacity):
             "battery_cost" : math.ceil(annual_energy_use/365) * batt_cost_perkW,
             "pv_cost": cost_perW * ppr * 1000,
             "ac_monthly" : ac_monthly,
-            "annualEnergyUse" : annual_energy_use
+            "annualEnergyUse" : annual_energy_use,
+            "annualCost" : annualEnergyCost
         }
         # Print estimated results
         #print(f"Estimated Cost for Solar Panels: {results['pv_system_cost']}")

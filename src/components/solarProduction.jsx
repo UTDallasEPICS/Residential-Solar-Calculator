@@ -30,6 +30,7 @@ const SolarProduction = () => {
   const { PVWResult_JSON } = location.state || {};
 
   const ac_annual = PVWResult_JSON?.ac_annual || '';
+  const annualCost = PVWResult_JSON?.annualCost || 0;
   const capacity_factor = PVWResult_JSON?.capacity_factor || '';
   const og_battery_capacity = PVWResult_JSON?.battery_capacity || '';
   const num_panels = Math.ceil(consumption/100 * Math.ceil((PVWResult_JSON?.num_panels[0] + PVWResult_JSON?.num_panels[1])/2)) || '';
@@ -37,15 +38,18 @@ const SolarProduction = () => {
   const pv_system_cost = panel_cost * num_panels || '';
   const og_battery_cost = PVWResult_JSON?.battery_cost || '';
   const monthlyEnergyUse = PVWResult_JSON?.annualEnergyUse / 12;
-  const ac_monthly = PVWResult_JSON?.ac_monthly || 'dsfndfidsnfndsfjndsjvn';
+  const ac_monthly = PVWResult_JSON?.ac_monthly || '';
+  
   
   const [battery_capacity, setBatteryCapacity] = useState(0);
   const [battery_cost, setBatteryCost] = useState(0);
-
-
+  //const [totalCost, setTotalCost] = useState(battery_cost + pv_system_cost);
+  const totalCost = battery_cost + pv_system_cost || '';
+  const paybackPeriod = Math.ceil(totalCost/((consumption/100) * (annualCost/12)));
+  //monthly monitery value of panel production = monthly cost without solar panels when consumption = 100%
+  //pbp = total cost / monthly monitery energy production for pvs = total cost / monthly cost w/o pvs
 
     useEffect(() => {
-
         
         const costData = {
             labels: ['Panels', 'Batteries', 'Inverters'],
@@ -169,7 +173,8 @@ const SolarProduction = () => {
         setBarData(prodData);
         setBarOptions(prodOptions);
     }, [consumption, components]);
-
+    
+    
     return (
         <PrimeReactProvider value={{ unstyled: true }}>
             <section id="layout" className="flex h-screen bg-white">
@@ -275,7 +280,7 @@ const SolarProduction = () => {
                         <div className="w-1/3 m-4">
                             <div className="h-80 border border-slate-200 m-auto position-relative flex flex-col">
                                 <div className="mt-4 ml-4 font-light text-xl text-gray-500">Total Investment</div>
-                                <div className="mt-2 text-4xl text-gray-700 font-semibold text-center">${pv_system_cost+battery_cost}</div>
+                                <div className="mt-2 text-4xl text-gray-700 font-semibold text-center">${totalCost}</div>
                                 <div className="mt-4 overflow-auto">
                                     <PrimeChart type="pie" data={pieData} options={pieOptions} className="md:w-30rem ml-12" />
                                 </div>
@@ -289,7 +294,7 @@ const SolarProduction = () => {
                                     <div>
                                         <span className="text-sm text-gray-500 font-light">Payback Period</span>
                                         <div className="flex items-center">
-                                            <strong className="text-2xl text-gray-700 font-semibold">TBD</strong>
+                                            <strong className="text-2xl text-gray-700 font-semibold">{paybackPeriod} Months</strong>
                                         </div>
                                     </div>
 

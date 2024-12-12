@@ -93,11 +93,12 @@ const Button = styled.button`
 export const LandingPage = () => {
  const [address, setAddress] = useState("");
  const [annualEnergyUse, setAnnualEnergyUse] = useState('');
+ const [annualEnergyCost, setAnnualEnergyCost] = useState(0);
  const [solarPanelCapacity, setSolarPanelCapacity] = useState(370); // New state for solar panel capacity
  const navigate = useNavigate()
 
  // Handle form submission (currently a placeholder for functionality)
- const getCosts = async (aress, energy, capacity) => {
+ const getCosts = async (aress, energy, annualCost, capacity) => {
   try {
     const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
       method: 'POST',
@@ -107,6 +108,7 @@ export const LandingPage = () => {
       body: JSON.stringify({ 
         address: aress,
         annualEnergyUse: energy,
+        annualEnergyCost: annualCost,
         solarPanelCapacity: capacity // Include solar panel capacity in the request
       })
     });
@@ -124,8 +126,8 @@ export const LandingPage = () => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  console.log('Form Submitted', { address, annualEnergyUse, solarPanelCapacity });
-  getCosts(address, annualEnergyUse, solarPanelCapacity);
+  console.log('Form Submitted', { address, annualEnergyUse, annualEnergyCost, solarPanelCapacity });
+  getCosts(address, annualEnergyUse, annualEnergyCost, solarPanelCapacity);
 };
 //  const handleSubmit = async (e) => {
 //    e.preventDefault();
@@ -166,6 +168,15 @@ const handleSubmit = (e) => {
               placeholder="Enter energy usage in kWh"
               value={annualEnergyUse}
               onChange={(e) => setAnnualEnergyUse(e.target.value)}
+            />
+          </Label>
+          <Label>
+            Enter your total annual electricity cost:
+            <Input
+              type="number"
+              placeholder="Enter annual electricity cost"
+              value={annualEnergyCost}
+              onChange={(e) => setAnnualEnergyCost(e.target.value)}
             />
           </Label>
           <Label>
