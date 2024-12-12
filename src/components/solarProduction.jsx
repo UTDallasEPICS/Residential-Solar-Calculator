@@ -245,7 +245,7 @@ const SolarProduction = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-white rounded-sm p-2 flex-1 border border-gray-200 flex items-center">
+                        <div className="bg-white rounded-sm p-2 mr-4 flex-1 border border-gray-200 flex items-center">
                             <div className="rounded-full h-20 w-20 flex items-center justify-center">
                                 <img src={battery} className="text-2xl text-white" />
                             </div>
