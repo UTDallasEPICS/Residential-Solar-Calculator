@@ -48,8 +48,8 @@ const FAQ = () => {
             answer: "Most installations take 1-3 days once permits are approved. The overall process, including permitting, can take 4-8 weeks. Installation depends on system size and roof complexity. Local regulations in Dallas-Fort Worth may impact timing. Installers manage permits, scheduling, and final inspections."
         },
         {
-            question: "What is the lifespan of a solar panel inverter, and how often does it need to be replaced?",
-            answer: "Solar inverters typically last 10-15 years, depending on the type and brand. They may need to be replaced once or twice over the life of the solar panel system. Some newer models may last longer, especially if they are micro-inverters, which have a higher lifespan compared to string inverters."
+            question: "What are solar inverters and how often do they need to be replaced? ",
+            answer: "Solar inverters convert the electricity the solar panels generate (DC) electricity to (AC) electricity which is used by home appliances. Solar inverters typically last 10-15 years, depending on the type and brand. They may need to be replaced once or twice over the life of the solar panel system. Some newer models may last longer, especially if they are micro-inverters, which have a higher lifespan compared to string inverters."
         },
         {
             question: "Are solar panels affected by weather conditions, like hail or extreme heat?",
@@ -88,8 +88,12 @@ const FAQ = () => {
             answer: "Maintenance is minimal and typically involves periodic cleaning to remove debris, dirt, and leaves. Regular checks ensure panels stay efficient. Solar panels are durable, but heavy debris could potentially cause damage. In most cases, rain helps keep them clean, and professional maintenance checks can ensure optimal performance."
         },
         {
+            question: "How were the calculations done?",
+            answer: "These calculations were done using PVWatts to track the amount of potential solar energy produced and determine the configuration of the solar energy system."
+        },
+        {
             question: "Have any more questions?",
-            answer: "Please feel free to contact us at (insert email here)"
+            answer: "For more information on solar energy systems, visit https://www.epa.gov/hw/solar-panel-frequent-questions. Or contact us at https://sustainability.utdallas.edu/contact/."
         }
     ];
 
