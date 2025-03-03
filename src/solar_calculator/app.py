@@ -4,9 +4,10 @@ import math
 from location import location  # Assumed to be a custom module for getting location data
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-
+from dotenv import load_dotenv  # Import load_dotenv
 from flask import send_from_directory
 
+load_dotenv()
 
 # Initialize Flask application
 app = Flask(__name__, static_folder="../../build", static_url_path="")
@@ -55,10 +56,8 @@ def get_system_info():
             return jsonify(pvw_result)  # Return the results as JSON
 
 
-# Read the API key from a text file
-api_file = open("api-keys.txt", "r")
-line = api_file.readlines()[0]
-api_key = line.split(",")[1]  # Extract API key from the file
+# Read the API key
+api_key = os.getenv("NREL_API_KEY")
 
 
 # Function to process system information using PVWatts API
