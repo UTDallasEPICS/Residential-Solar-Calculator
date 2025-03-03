@@ -1,7 +1,7 @@
 /* Overall Page Styling */
 body {
   margin: 0;
-  font-family: 'DinProRegular', sans-serif;
+  font-family: "DinProRegular", sans-serif;
   background-color: #154734; /* UTD Green */
   color: #ffffff; /* White text */
 }
@@ -65,7 +65,7 @@ body {
   height: auto;
 }
 
-#header_menu{
+#header_menu {
   text-align: center;
 }
 

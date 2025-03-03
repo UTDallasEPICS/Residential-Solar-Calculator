@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import styled from 'styled-components';
-//import { useNavigate } from 'react-router-dom';
-import background from '../assets/solarPanel.jpg';
-import './Styles.css';
-import axios from 'axios'
+import styled from "styled-components";
+import background from "../assets/solarPanel.jpg";
+import "./Styles.css";
 import { useNavigate } from "react-router-dom";
 
 // Styled components for layout and styling
@@ -13,7 +11,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 40px;
-  font-family: 'Arial, sans-serif';
+  font-family: "Arial, sans-serif";
   background-image: url(${background});
   background-size: cover;
   background-position: center;
@@ -35,7 +33,7 @@ const Card = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #C95100;
+  color: #c95100;
   font-size: 28px;
   margin-bottom: 20px;
 `;
@@ -90,69 +88,60 @@ const Button = styled.button`
   }
 `;
 
-
 export const LandingPage = () => {
- const [address, setAddress] = useState("");
- const [annualEnergyUse, setAnnualEnergyUse] = useState('');
- const [annualEnergyCost, setAnnualEnergyCost] = useState('');
- const [solarPanelCapacity, setSolarPanelCapacity] = useState(370); // New state for solar panel capacity
- const navigate = useNavigate()
+  const [address, setAddress] = useState("");
+  const [annualEnergyUse, setAnnualEnergyUse] = useState("");
+  const [annualEnergyCost, setAnnualEnergyCost] = useState("");
+  const [solarPanelCapacity, setSolarPanelCapacity] = useState(370); // New state for solar panel capacity
+  const navigate = useNavigate();
 
- // Handle form submission (currently a placeholder for functionality)
- const getCosts = async (aress, energy, annualCost, capacity) => {
-  try {
-    const response = await fetch('http://127.0.0.1:5000/getSystemInfo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ 
-        address: aress,
-        annualEnergyUse: energy,
-        annualEnergyCost: annualCost,
-        solarPanelCapacity: capacity // Include solar panel capacity in the request
-      })
+  // Handle form submission (currently a placeholder for functionality)
+  const getCosts = async (aress, energy, annualCost, capacity) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getSystemInfo`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            address: aress,
+            annualEnergyUse: energy,
+            annualEnergyCost: annualCost,
+            solarPanelCapacity: capacity, // Include solar panel capacity in the request
+          }),
+        }
+      );
+
+      const result = await response.json();
+      console.log("Result from Python:", result);
+
+      // Navigate to OutputPage with result as state
+      navigate("/solarProduction", { state: { PVWResult_JSON: result } });
+    } catch (error) {
+      console.error("Error calling Python function:", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Submitted", {
+      address,
+      annualEnergyUse,
+      annualEnergyCost,
+      solarPanelCapacity,
     });
-
-    const result = await response.json();
-    console.log("Result from Python:", result);
-
-    // Navigate to OutputPage with result as state
-    navigate('/solarProduction', { state: { PVWResult_JSON: result } });
-
-  } catch (error) {
-    console.error("Error calling Python function:", error);
-  }
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  console.log('Form Submitted', { address, annualEnergyUse, annualEnergyCost, solarPanelCapacity });
-  getCosts(address, annualEnergyUse, annualEnergyCost, solarPanelCapacity);
-};
-//  const handleSubmit = async (e) => {
-//    e.preventDefault();
-//    //console.log('Form Submitted', { address, annualEnergyUse });
-//    try{
-//      await axios.post('http://127.0.0.1:5000/getSystemInfo', { address, annualEnergyUse, solarPanelCapacity })
-//        .then((response) => {
-//           //console.log("Response is ", response.data)
-//           navigate('/solarProduction', {state: {response : response.data, annualEnergyUse : annualEnergyUse}})
-//        })
-//    }
-//    catch(error){
-//       console.log('Error: ', error)
-//    }
-   
-   
+    getCosts(address, annualEnergyUse, annualEnergyCost, solarPanelCapacity);
+  };
 
   return (
     <Container>
       <Card>
         <Title>Residential Solar Calculator</Title>
 
-       {/* Form Section */}
-       <Form onSubmit={handleSubmit}>
+        {/* Form Section */}
+        <Form onSubmit={handleSubmit}>
           <Label>
             Enter your address:
             <Input
@@ -191,9 +180,9 @@ const handleSubmit = (e) => {
           </Label>
           <Button type="submit">Submit</Button>
         </Form>
-     </Card>
-   </Container>
- );
-}
+      </Card>
+    </Container>
+  );
+};
 
 export default LandingPage;

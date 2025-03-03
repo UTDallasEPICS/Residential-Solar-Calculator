@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 // Card container with white background
 const Card = styled.div`
@@ -21,7 +21,7 @@ const PageContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #C95100;
+  color: #c95100;
   font-size: 24px;
 `;
 
@@ -55,14 +55,32 @@ const AboutUsPage = () => (
       <Title>Residential Solar Calculator</Title>
       <SubTitle>Team SUS (Size Ur Solar)</SubTitle>
       <Text>
-        <strong>Background:</strong> The University of Texas at Dallas Office of Sustainability was established under the Facilities Management in 2011. This office was made with a goal to engage the university in environmental stewardship, fostering a culture of sustainability to be cherished within the campus as a whole. The Office of Sustainability collaborates with stakeholders and students across the university to integrate sustainability principles and practices into the UT Dallas community.
+        <strong>Background:</strong> The University of Texas at Dallas Office of
+        Sustainability was established under the Facilities Management in 2011.
+        This office was made with a goal to engage the university in
+        environmental stewardship, fostering a culture of sustainability to be
+        cherished within the campus as a whole. The Office of Sustainability
+        collaborates with stakeholders and students across the university to
+        integrate sustainability principles and practices into the UT Dallas
+        community.
       </Text>
       <Text>
-        <strong>Project Description:</strong> The Residential Solar Calculator project plans to combat sustainable energy and electric grid failures by providing information to DFW residents on energy storage and solar panels. The calculator will provide estimates on solar panel pricing and batteries by taking inputs from the user and working alongside Pvwatts to calculate information to aid the user in their pricing and adequate needs. The end goal of the project is to have a functioning web application where users can receive information such as battery size needed for outages, total cost on solar panels, and time it would take for solar panels to pay themselves off.
+        <strong>Project Description:</strong> The Residential Solar Calculator
+        project plans to combat sustainable energy and electric grid failures by
+        providing information to DFW residents on energy storage and solar
+        panels. The calculator will provide estimates on solar panel pricing and
+        batteries by taking inputs from the user and working alongside Pvwatts
+        to calculate information to aid the user in their pricing and adequate
+        needs. The end goal of the project is to have a functioning web
+        application where users can receive information such as battery size
+        needed for outages, total cost on solar panels, and time it would take
+        for solar panels to pay themselves off.
       </Text>
       <SubTitle>Project Partner</SubTitle>
       <Text>
-        <Link href="https://sustainability.utdallas.edu/">UTD Office of Sustainability</Link>
+        <Link href="https://sustainability.utdallas.edu/">
+          UTD Office of Sustainability
+        </Link>
       </Text>
       <SubTitle>The Team</SubTitle>
       <TeamMember>Samikshaa — Project Liaison</TeamMember>
@@ -78,7 +96,10 @@ const AboutUsPage = () => (
       <TeamMember>Viswaretas Kotra — Financial Officer</TeamMember>
       <TeamMember>Colin Zhang — Document Manager</TeamMember>
       <Text>
-        <strong>Visit our GitHub:</strong> <Link href="https://github.com/UTDallasEPICS/Residential-Solar-Calculator">Project Repository</Link>
+        <strong>Visit our GitHub:</strong>{" "}
+        <Link href="https://github.com/UTDallasEPICS/Residential-Solar-Calculator">
+          Project Repository
+        </Link>
       </Text>
     </Card>
   </PageContainer>

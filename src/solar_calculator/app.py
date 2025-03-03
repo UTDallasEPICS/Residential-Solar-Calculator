@@ -133,14 +133,6 @@ def process_system_info(
         return results
 
 
-# Function to estimate daily energy production per panel
-# ppr = Panel Power Rating(Using LG NeON 2 as default panel specifications), rad = avg daily solar radiation for
-# a particular month, eff = system efficiency (1-(losses/100)), cons = monthly energy consumption
-# ppr MUST BE IN kW NOT W
-""" def get_num_panels(ppr, rad, eff, cons):
-    return (math.ceil(cons/(ppr * rad * eff * 30))) """
-
-
 # Function to estimate the PV system size based on annual energy use
 def get_pv_system(annual_energy_use):
     return ((annual_energy_use / 365) * 1.29) / 5.07
